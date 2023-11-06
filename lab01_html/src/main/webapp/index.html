@@ -1,17 +1,33 @@
 <!--
-- Html 요소: 태그, 속성, 컨텐트
+- Html 요소: 태그, 속성(attribute), 컨텐트
 - Html 문법: <테그 속성1 = "값1" 속성2="값2"...> 컨텐트 </태그>
+- 대소문자 구분을 하지 않지만, 모두 소문자로 쓰는 것을 권장.
+- Html(element)
+    1. block: 자동으로 줄바꿈되는 요소. 다른 요소의 아래쪽으로 배치
+    ex)h1~h6, div, form, ul,....
+    2. inline: 자동으로 줄바꿈되지 않는 요소. 다른 요소의 오른쪽에 배치
+    ex) a, span, img, ....
 -->
 
 <!DOCTYPE html><!-- DTD(Document Type Definifiton): 문서 타입 정의 -->
+
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>lab01_html</title>
-</head>
-<body>
-<h1>안녕하세요. Hello World</h1>
-<h2>수업중입니다.</h2>
-<h3>Test</h3>
-</body>
+    <head> <!-- 웹 페이지의 설정: 인코딩, CSS, 자바스크립트 포함 -->
+        <meta charset="UTF-8" /> <!-- HTML 파일 인코딩 -->
+        <title>lab01_html</title> <!-- 웹 브라우저 탭 타이틀-->
+    </head>
+    
+    <body> <!-- 화면에 보여지는 부분 -->
+        <!-- Heading Tag h1~h6. 문서의 제목. --> 
+        <h1>안녕하세요. Hello World</h1>
+        <h2>수업중입니다.</h2>
+            
+       
+            <!-- Anchor Tag: 링크 -->
+        <p><a href="https://github.com/soLobster/lab_web" target='_blank' style="color: blue;">깃헙 링크</a></p>
+        <p><a href="https://naver.com" target="_blank">네이버</a></p>
+          
+            
+        <h3>Test</h3>
+    </body>
 </html>
