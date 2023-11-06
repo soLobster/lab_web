@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="UTF-8">
+    	<title>HTML List</title>
+    	<style>
+        .a-hr{
+            background-color: blue;
+            height: 10px;
+        }
+        
+        table{
+            border-collapse: collapse;
+        }
+        
+        th, td{
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            border: 2px solid #000;
+            
+            vertical-align: top;
+            vertical-align: bottom;
+            vertical-align: middle;
+        }
+        
+        </style>
+    </head>
+    <body>
+    	<a href="index.html">인덱스 페이지</a>
+    	
+    	<hr />
+    	
+    	<h1>Unordered List</h1>
+    	<ul style="list-style: square; font-size: 25px;"> <!-- unordered list -->
+            <li>무빙</li> <!-- list item -->
+            <li>이두나!</li>
+            <li>마스크걸</li>
+        </ul>
+        
+        <hr />
+        
+        <h1>Ordered List</h1> <!-- 순서가 있는 리스트(목록) -->
+        <ol style="font-size: 25px;">
+            <li>MLB
+                <ul>
+                    <li>Texas Rangers</li>
+                    <li>Arizona DiamondBack</li>
+                </ul>
+            </li> <!-- list item -->
+            <li>KBO
+                <ul>
+                    <li>LG TWINS</li>
+                    <li>KT WIZ</li>
+                </ul>
+            </li>
+            <li>NPB
+                <ul>
+                    <li>Hanshin Tigers</li>
+                    <li>Orix Buffaloes</li>
+                </ul>
+            </li>
+        </ol>
+        
+        
+        <h1>Description List</h1> <!-- 사전식 리스트. 용어와 설명을 갖는 목록. -->
+        <dl style="text-align: center;">
+            <dt>HTML</dt> <!-- description term: 용어 -->
+            <dd>Hyper Text Markup Language</dd>  <!-- description definition: 설명, 정의 -->
+            <dd>웹페이지의 정적 컨텐츠를 작성하는 프론트엔드 개발 언어</dd>
+            
+            <dt>CSS</dt>
+            <dd>Cascading Style Sheet</dd>
+            <dd>웹 페이지의 스타일을 작성하는 프론트엔드 개발 언어</dd>
+            
+            <dt>Java Script</dt>
+            <dd>웹 페이지의 동적인 기능들, 이벤트 처리 등을 담당하는 프론트엔드 개발 언어.</dd>
+        </dl>
+        
+        
+        <a>
+        
+        <pre style="text-align: center;">
+            서울 특별시 
+            강남구 테헤란로
+            삼원 타워
+            4층 아이티윌
+            10 강의실 
+            자바 웹 개발자 전문가 양성 과정
+        </pre>
+        
+        <table>
+            <tr>
+                <th scope="col">날짜</th>
+                <th scope="col">이름</th>
+                <th scope="col">성별</th>
+            </tr>
+            <tr>
+                <td>11/15</td>
+                <td>김우직</td>
+                <td>남</td>
+            </tr>
+            <tr>
+                <td>11/14</td>
+                <td>박수진</td>
+                <td>여</td>
+            </tr>
+        </table>
+        
+    </body>
+</html>
