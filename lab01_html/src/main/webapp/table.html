@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="UTF-8">
+    	<title>HTML-Table</title>
+    	<style>
+            /* CSS
+            style 태그는 CSS다.
+             */
+            table {
+                border-collapse: collapse;
+                background-color: honeydew;
+            }
+            
+            caption{
+                font-size: 30px;
+                font-weight: bold;
+            }
+        
+            th {
+                width: 300px;
+                height: 50px;
+                text-align: center;
+                border: 1px solid #000;
+                font-size: 30px;
+                font-weight: bold;
+                
+                vertical-align: top;
+                vertical-align: bottom;
+                vertical-align: middle;
+            }
+            
+            td {
+                font-size: 25px;
+                width: 300px;
+                height: 50px;
+                text-align: left;
+                border: 1px solid #000;
+            }
+        </style>
+    </head>
+    
+    <body>
+    <a href="index.html">Index Page</a>
+    <hr />    
+    <h1>Table</h1>
+    <hr />
+        <table>
+            <caption>테이블 만들기</caption>
+            <tr>
+                <th scope="col">날짜</th>
+                <th scope="col">이름</th>
+                <th scope="col">성별</th>
+            </tr>
+            <tr>
+                <td>11/15</td>
+                <td>김우직</td>
+                <td>남</td>
+            </tr>
+            <tr>
+                <td>11/14</td>
+                <td>박수진</td>
+                <td>여</td>
+            </tr>
+        </table>
+    	
+    	<hr />
+    	
+    	<table>
+            <caption>프론트엔드 시험 성적</caption> <!-- 테이블 제목 -->
+            
+            <thead> <!-- 테이블 헤더 -->
+                <tr> <!--테이블 행(row) -->
+                    <th>번호</th> <!-- 테이블 셀 헤더  ex) 컬럼 이름, 행 이름. -->
+                    <th>HTML</th>
+                    <th>CSS</th>
+                    <th>JavaScript</th>
+                </tr>                
+            </thead>
+            
+            <tbody> <!-- 테이블 바디 -->
+                <tr>
+                    <td>1</td> <!-- 테이블 셀. 데이터 -->
+                    <td>100</td>
+                    <td>80</td>
+                    <td>90</td>
+                </tr>
+                
+                <tr>
+                    <td>2</td> <!-- 테이블 셀. 데이터 -->
+                    <td>80</td>
+                    <td>70</td>
+                    <td>90</td>
+                </tr>
+                
+                <tr>
+                    <td>3</td> <!-- 테이블 셀. 데이터 -->
+                    <td>60</td>
+                    <td>100</td>
+                    <td>80</td>
+                </tr>
+            </tbody>
+            
+            <tfoot> <!-- 테이블 푸티 -->
+                <tr>
+                    <th>합계</th>
+                    <td>240</td>
+                    <td>250</td>
+                    <td>260</td>
+                </tr>
+            </tfoot>
+        
+        </table>
+        
+        <hr />
+           
+        <table>
+            <caption>연락처 테이블</caption>
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th colspan="2">전화번호</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>홍길동</td>
+                <td>010-1234-5678</td>
+                <td>02-1234-5678</td>
+            </tr>
+            <tr>
+                <td>아이티윌</td>
+                <td>010-0000-0000</td>
+                <td>02-0000-0000</td>
+            </tr>
+        </tbody>
+    	</table>
+    	<hr />
+    	<table>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <td>홍길동</td>
+                    <td>아이티윌</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th rowspan="2">전화번호</th>
+                    <td>010-1234-5678</td>
+                    <td>010-0000-0000</td>
+                </tr>
+                
+                <tr>
+                    <td>02-1234-5678</td>
+                    <td>02-0000-0000</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
