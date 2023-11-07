@@ -3,6 +3,7 @@
     <head>
     	<meta charset="UTF-8">
     	<title>CSS Selector</title>
+    	<link href="CSS/mystyle.css" rel="stylesheet">
     	<style>
             
             body{
@@ -37,6 +38,7 @@
             
             /* tag.class#id */
             p.color-white {
+                width: 50%;
                 /* p 태그 요소들 중에서 class 속성 값이 color-white인 요소들*/
                 border: 5px solid deepskyblue;
                 background-color: whitesmoke;
@@ -44,10 +46,10 @@
             }
             
             p#id-1{
+              width: 50%;
               background-color: darkseagreen;   
               color: whitesmoke;
             }
-            
         </style>
     </head>
     <body>
@@ -69,6 +71,7 @@
         -->
     	
     	<div class="color-white">Division 1</div>
+    	<!-- 하나의 태그 안에 클래스 2개 선언하는 방법 공백을 주고 클래스 이름을 두개 쓴다 -->
     	<div class="color-white">Division 2</div>
     	<div id="id-1">Division 3</div>
     	
