@@ -1,0 +1,36 @@
+@charset "UTF-8"; /* CSS 파일의 인코딩 설정 */
+
+h1{
+    color: red;
+}
+
+#one_div{
+    color: red;
+}
+
+div {
+    border: 5px solid black; /* 테두리선 두께 */
+    color:  white;
+    font-size: 20px;
+    padding: 10px; /* 테두리선 안쪽 여백 */
+    margin: 10px; /* 테두리(border) 바깥 여백 */
+    font-weight: bolder;
+}
+
+p {
+    border: 3px solid lightsalmon;
+    color: lightsalmon;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    font-size: 20px;
+}
+
+body {
+    background-color: cadetblue;
+    text-align: center;
+    color: white;
+}
+

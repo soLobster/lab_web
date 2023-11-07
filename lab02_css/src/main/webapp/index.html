@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="UTF-8">
+    	<title>CSS</title>
+    	<link rel="stylesheet" href="CSS/mystyle.css"/> <!-- 외부 CSS 파일 링크 -->
+    	<style>
+            /* internal CSS */
+            body{
+                background-color: palegreen;
+                color: dodgerblue;
+            } 
+        </style>
+        
+        <!-- CSS 외부의 CSS파일은 내부의 스타일에 덮여씌워진다. -->
+        
+    </head>
+    <body>
+    	<h1>CSS</h1>
+    	<h2>Cascading Style Sheet</h2>
+    	
+    	<!-- 
+            
+            Front_End 개발 언어: 
+            1. HTML 웹 페이지의 정적 컨텐트 작성. 링크, 이미지, 테이블, 리스트,....
+            2. CSS 웹 페이지의 스타일(모양, 배치, ...) 설정. color, background-color, width, height,..
+            3. JS 웹 페이지의 동적인 변화, 이벤트 처리, 서버와의 (비동기) 통신.
+            
+            CSS 적용: 
+            1) external CSS 다른 CSS파일에서 작성된 내용을 링크해서 사용.
+            2) internal CSS html 파일의 <Style> 태그안에서 작성된 내용을 적용.
+            3) inline CSS 각각의 html 태그 안에서 Style 속성의 여러가지 프로퍼티들을 설정.
+              
+        -->
+    	
+    	<div style="border: 8px double plum;" id="one_div">Division 1</div>
+    	<div style="border: 8px double plum;">Division 2</div>
+        <div style="border: 8px double plum;">Division 3</div>
+        
+    	<div style="border: 8px double plum;">
+            <p style="border: 10px double deepskyblue;">paragraph 1</p>
+            <p style="border: 10px double deepskyblue;">paragraph 2</p>
+        </div>
+        
+    </body>
+</html>
