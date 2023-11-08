@@ -1,107 +1,100 @@
 @charset "UTF-8";
 
 @font-face {
-                    font-family: 'GmarketSansMedium';
-                    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-                    font-weight: normal;
-                    font-style: normal;
-                   }
-        
-        body    {
-                    margin:0px;
-                    padding:0px;
-                    min-width: fit-content;
-                }
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: mintcream;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'GmarketSansMedium';
+    min-width: fit-content;
+}
 
 
-        .mainbox {
-                    width: 700px;
-                    padding: 30px;
-                    margin: 30px;
-                    margin-right:auto;
-                    margin-left: auto;
-                    border: 1px soild black;
-                  } 
-  
-  
-         section {
-                    margin-bottom:24px;
-                  }
-  
-        h1{
-                margin:0px;
-                padding:0px;
-                font-size:36px;
-                font-weight: bold;
-                font-style: italic;
-                margin-bottom: 8px;
-                text-align: right;
-           }
-
-          h2 {
-                margin:0px;
-                padding:0px;
-                font-size:25px;
-                color:rgb(0, 128, 255);
-                font-weight: bold;
-                margin-bottom: 16px;
-                border-bottom: 2px solid rgb(88, 88, 88);
-                padding-bottom: 5px;
-            }
+.box {
+    width: 700px;
+    padding: 30px;
+    margin: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px soild black;
+}
 
 
+section {
+    margin-bottom: 24px;
+}
 
-          .mine{
-                width: 120px;
-                height: 120px;
-                border-radius: 20%;
-                float: left;
-             }
+h1 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 50px;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 8px;
+    text-align: right;
+}
 
-          .title{
-                font-size:16px;
-                color:rgb(0, 128, 255);
-                font-weight: bold;
-                float: right;
-                line-height: 16px;
-            }
-  
-          .sns{
-                text-align: left;
-            }
+h2 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 28px;
+    color: royalblue;
+    font-weight: bold;
+    margin-bottom: 16px;
+    border-bottom: 2px solid dimgray;
+    padding-bottom: 5px;
+}
 
-          .sns-img{
-                width: 30px;
-                height: 30px;
-            }
-        
-          .float-wrap {
-                overflow: hidden;
-                margin-bottom: 4px;
-            }
-        
-          .text{
-                line-height: 16px;
-                font-size: 13px;
-                font-weight:bold;
-                color:black;
-                margin-bottom:6px;
-            }
-          
-          .subtext{
-                font-size: 17px;
-                color:rgb(88, 88, 88);
-                padding-left:16px;
-                margin-bottom:8px;
-            }
-        
-          .righttext{
-                font-size:11px;
-                font-weight: 300;
-                color: #282828;
-                float: right;
-            }
-            
-           body{
-               font-family: 'GmarketSansMedium';
-           }
+.mine {
+    width: 150px;
+    height: 150px;
+    border-radius: 20%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 18px;
+    color: royalblue;
+    font-weight: bold;
+    float: right;
+    line-height: 16px;
+}
+
+
+.sns-img {
+    width: 30px;
+    height: 30px;
+}
+
+.float-wrap {
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.text {
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: black;
+    margin-bottom: 6px;
+}
+
+.subtext {
+    font-size: 18px;
+    color: dimgray;
+    padding-left: 16px;
+    margin-bottom: 8px;
+}
+
+.righttext {
+    font-size: 14px;
+    color: darkgray;
+    float: right;
+}
