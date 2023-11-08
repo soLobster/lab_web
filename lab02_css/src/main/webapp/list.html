@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="UTF-8">
+    	<title>CSS List</title>
+    	<style>
+            .nav{
+                list-style: none;
+                font-size: 20px;
+                padding-left: 8px;
+                width: 80%;
+                height: 80px;
+                background-color: lightseagreen;
+            }
+            
+            .nav > li {
+                display: inline-block;
+                font-style: italic;
+                width: 100px;
+                text-align: center;
+                border: 2px solid white;
+                margin: 10px;
+                padding: 10px;
+            }
+            
+            .nav > li > a {
+                text-decoration: none;
+                color: white;
+                font-weight: bolder;
+            }
+        </style>
+    </head>
+    <body>
+    	<h1>List Style</h1>
+    	
+    	<ul class="nav">
+            <li><a href="https://www.youtube.com/" target="_blank">너튜브</a></li>
+            <li><a href="https://www.instagram.com/" target="_blank">인별</a></li>
+            <li><a href="https://www.tiktok.com/" target="_blank">틱톡</a></li>
+        </ul>
+    </body>
+</html>
