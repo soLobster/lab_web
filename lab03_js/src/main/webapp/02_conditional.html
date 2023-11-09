@@ -11,6 +11,11 @@
 
 <body>
     <h1>JavaScript 조건문</h1>
+    <input type="number" id="numInput" placeholder="정수를 입력하세요" />
+    <button onclick="checkEven()">짝수? 홀수?</button>
+    <button>양수? 음수?</button>
+
+    <div id="result">결과</div>
 
     <script>
 
@@ -25,27 +30,49 @@
         console.log('x =', x);
         //x = 2; // 컴파일 언어가 아니기 때문에 에러가 나오지 않는다. but 실행하게되면 에러 발생.
         // 상수 변수에는 새로운 값을 재할당(저장)할 수 없음.
-        
+
         let y = 100;
-        console.log('y=',y);
+        console.log('y=', y);
         y = 'hello';
-        console.log('y=',y); // let으로 선언한 변수는 값을 재할당할 수 있음.
+        console.log('y=', y); // let으로 선언한 변수는 값을 재할당할 수 있음.
         // 자바스크립트 문자열은 작은따옴표, 큰따옴표를 모두 사용할 수 있음.
-        
+
         // 자바는 컴파일 언어: 코드를 컴파일해서 실행가능한 바이너리를 만들고, 그 바이너리를 실행하는 언어
         // ex) Java: *.java --- compile ---> *.class (바이너리) --- 실행 ---> 결과
         // ex) C, C++, C#, Kotlin, Swift, ...
-        
+
         // 인터프리터 언어: 코드를 한 줄씩 해석해서 실행하는 언어.
         // ex) JS, Python, ...
-        
+
         // 정적 타이핑(static typing) 언어: 
         //  - 변수를 선언할 때 변수의 타입이 결정되고, 타입을 바꿀 수 없는 언어.
         //  - Java, C, C++, C#, ....
         // 동적 타이핑(dynamic typing) 언어: 
         //  - 변수를 선언할 때 변수 타입이 결정되지 않고, 값을 할당할 때 타입이 동적으로 결정되는 언어.
         //  - JS, Python, ....
-        
+
+
+        //  input#numInput 요소를 찾음
+        const numInput = document.getElementById('numInput');
+
+        //  div#result 요소를 찾음
+        const result = document.getElementById('result');
+
+
+        function checkEven() {
+            //  input에 입력된 값을 읽고, 짝/홀 여부를 div에 출력.
+            const number = numInput.value; //   input 요소에 입력된 값.
+            console.log('number=', number);
+
+            if (number % 2 === 0) {
+                result.innerHTML = '짝수 입니다.'
+            } else {
+                result.innerHTML = '홀수 입니다.'
+            }
+        }
+
+
+
     </script>
 
 
