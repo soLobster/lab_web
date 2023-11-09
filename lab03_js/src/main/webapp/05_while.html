@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JS_while</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        table,td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>자바스크립트 while 반복문</h1>
+
+    <ul id="list"></ul>
+
+    <table>
+        <tbody id="table-body"></tbody>
+    </table>
+
+
+    <script>
+        //1. 리스트에 아이템 3개를 추가.
+        //2. 테이블 바디에 10x10 
+        const list = document.querySelector('ul#list');
+        let html = '';
+        let n = 1;
+        while (n <= 3) {
+            html += `<li>Item ${n}</li>`;
+            //let listItem = document.createElement('li');
+            //listItem.textContent = `item ${n} `;
+            //list.appendChild(listItem);
+            n++;
+        }
+        list.innerHTML = html;
+
+        const table = document.querySelector('tbody#table-body');
+        html = ''; //tbody에 들어갈 Content
+        let x = 0;
+        while (x < 10) {
+            let y = 1;
+            //let row = document.createElement('tr');
+            html += '<tr>';
+            while (y <= 10) {
+                //let tablebody = document.createElement('td');
+                html += `<td>${x * y}</td>`;
+                //tablebody.textContent = `${x * y}`;
+                //row.appendChild(tablebody);
+                y++;
+            }
+            //table.appendChild(row);
+            html += '</tr>';
+            x++;
+        }
+
+        table.innerHTML = html;
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
