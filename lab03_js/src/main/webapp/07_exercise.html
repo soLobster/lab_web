@@ -18,15 +18,18 @@
         // img#img-bulb를 찾음:
         const bulb = document.querySelector('img#img-bulb');
 
+        // mouseover-mouseout , mouseenter-mouseleave
+
+
         // 이미지 위에 마우스가 있을 때, 이미지를 bulb_on.gif로 변경.
-        bulb.addEventListener('mouseover', function () {
-            bulb.src = "https://github.com/JakeOh/202309_itwill_java146_lab_web/blob/master/lab03_js/src/main/webapp/images/bulb_on.gif?raw=true";
+        bulb.addEventListener('mouseenter', function () {
+            bulb.src = "images/bulb_on.gif";
             bulb.alt = "bulb_on";
         });
 
         // 마우스가 이미지 밖으로 나가면, 이미지를 bulb_off.gif로 변경.
-        bulb.addEventListener('mouseout', function () {
-            bulb.src = "https://.com/JakeOh/202309_itwill_java146_lab_web/blob/master/lab03_js/src/main/webapp/images/bulb_off.gif?raw=true";github
+        bulb.addEventListener('mouseleave', function () {
+            bulb.src = "images/bulb_off.gif";
             bulb.alt = "bulb_off";
         });
     </script>
