@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 클래스를 사용한 객체 생성:
     const pt1 = new Point(0, 0);
     console.log(pt1);
-    
-    pt1.move(1,-1);
+
+    pt1.move(1, -1);
     console.log(pt1);
 });
