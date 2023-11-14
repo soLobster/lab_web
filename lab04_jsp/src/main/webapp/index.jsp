@@ -11,10 +11,23 @@
 <body>
     <h1>인덱스 페이지</h1>
     <h2><%= LocalDateTime.now() %></h2>
-    
+
     <ul>
         <li>
-        <a href="ex1">첫번째 서블릿</a> <!-- context Root localhost8081/jsp1/ -->
+            <a href="ex1">첫번째 서블릿</a> <!-- context Root localhost8081/jsp1/ -->
+        </li>
+        
+        <li>
+            <a href="ex2">두번째 서블릿</a>
+        </li>
+        <li>
+            <a href="ex3">포워드 (Forward)</a>
+        </li>
+        <li>
+            <a href="ex4">리다이렉트 (Redirect)</a>
+        </li>
+        <li>
+            <a href="intro.jsp">JSP 소개</a>
         </li>
     </ul>
 </body>
