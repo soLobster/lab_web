@@ -32,7 +32,7 @@
             - 지역 변수 선언 & 초기화, 메서드 호출, 조건문, 반복문,....
          
          5. 식, 표현식(expression): <%= ... %> 
-            JSP가 Java로 변환될 때, out.write("") 메서드의 아규먼트로 전달되는 값.
+            JSP가 Java로 변환될 때, out.write(arg) 메서드의 아규먼트로 전달되는 값.
             HTML 코드에 문자열이 삽입이 된다.
          
     --%>
@@ -65,6 +65,9 @@ String timeStr = String.format("%d:%d:%d", now.getHour(), now.getMinute(), now.g
 
 <body>
     <h1>JSP 소개</h1>
+    <%
+    System.out.println(LocalDateTime.now());
+    %>
     <h2>날짜: <%= dateStr %></h2> <%-- 식(expression) --%>
     <h2>시간: <%= timeStr %></h2>
     <h3>이름: <%= NAME %></h3>
