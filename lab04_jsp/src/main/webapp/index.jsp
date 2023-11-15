@@ -20,6 +20,8 @@
         <li><a href="intro.jsp">JSP 소개</a></li>
         <li><a href="form.jsp">폼 (Form)</a></li>
         <li><a href="main.jsp">include 지시문(directive)</a></li>
+        <li><a href="scriptlet.jsp">스크립트릿(scriptlet)</a></li>
+        <li><a href="actiontag.jsp">JSP Action Tag(액션 태그)</a></li>        
     </ul>
 </body>
 </html>
