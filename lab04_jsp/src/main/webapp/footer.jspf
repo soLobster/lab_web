@@ -1,0 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+
+<%-- 
+jspf(jsp fragment / jsp 조각): 다른 JSP에 포함되는 조각파일임을 명시하는 확장자.
+--%>
+
+<footer class = "shadow p-3 bg-body rounded card m-2 text-secondary">
+    <div class="fw-bolder fs-5">(주)TEN CLASS</div>
+    <div class="fs-6">https://www.0410.com</div>
+</footer>

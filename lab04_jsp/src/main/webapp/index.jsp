@@ -13,25 +13,13 @@
     <h2><%= LocalDateTime.now() %></h2>
 
     <ul>
-        <li>
-            <a href="ex1">첫번째 서블릿</a> <!-- context Root localhost8081/jsp1/ -->
-        </li>
-        
-        <li>
-            <a href="ex2">두번째 서블릿</a>
-        </li>
-        <li>
-            <a href="ex3">포워드 (Forward)</a>
-        </li>
-        <li>
-            <a href="ex4">리다이렉트 (Redirect)</a>
-        </li>
-        <li>
-            <a href="intro.jsp">JSP 소개</a>
-        </li>
-        <li>
-            <a href="form.jsp">폼 (Form)</a>
-        </li>
+        <li><a href="ex1">첫번째 서블릿</a></li> <!-- context Root localhost8081/jsp1/ -->
+        <li><a href="ex2">두번째 서블릿</a></li>
+        <li><a href="ex3">포워드 (Forward)</a></li>
+        <li><a href="ex4">리다이렉트 (Redirect)</a></li>
+        <li><a href="intro.jsp">JSP 소개</a></li>
+        <li><a href="form.jsp">폼 (Form)</a></li>
+        <li><a href="main.jsp">include 지시문(directive)</a></li>
     </ul>
 </body>
 </html>
