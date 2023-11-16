@@ -21,7 +21,6 @@ public class HomeController extends HttpServlet {
         System.out.println("homeController::doGet() Call");
 
         request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-        ;
     }
 
 }
