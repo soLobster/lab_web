@@ -1,6 +1,7 @@
 <%@ page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri ="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,21 @@
         <li><a href="main.jsp">include 지시문(directive)</a></li>
         <li><a href="scriptlet.jsp">스크립트릿(scriptlet)</a></li>
         <li><a href="actiontag.jsp">JSP Action Tag(액션 태그)</a></li>        
-        <li><a href="el.jsp">EL(Expression Language)</a></li>        
+        <li><a href="el.jsp">EL(Expression Language)</a></li>       
+        <li><a href="jstl.jsp">JSTL</a></li>                
+        <li><a href="form2.jsp">폼 2 (JSTL)</a></li>
+        <!-- URL을 만드는 JSTL 태그 -->     
+        <li>
+                <c:url var="reqURL" value="form2_result.jsp">
+                    <c:param name="username" value="adm&in"/>
+                    <c:param name="color" value="b"/>      
+                </c:url>      
+                <a href ="${reqURL}">클릭</a>
+                <%-- <a href="form2_result.jsp?username=admin&color=r">클릭</a> --%>
+        </li>                        
+        <li>
+            <a href="mvc">MVC Model 2</a>
+        </li>
     </ul>
 </body>
 </html>
