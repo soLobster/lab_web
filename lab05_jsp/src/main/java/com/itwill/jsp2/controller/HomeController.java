@@ -1,4 +1,4 @@
-package com.itwil.jsp2.controller;
+package com.itwill.jsp2.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +13,9 @@ import org.slf4j.LoggerFactory;
 /**
  * Servlet implementation class HomeController
  */
-@WebServlet(name = "homeController", urlPatterns = {""})
+
 // "http://localhost:8081/jsp2" context root를 처리하는 서블릿
+@WebServlet(name = "homeController", urlPatterns = { "" })
 public class HomeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     //Logger 타입 org.slf4j.Logger를 임포트 해야한다.
@@ -33,5 +34,10 @@ public class HomeController extends HttpServlet {
         // 요청(request)를 뷰(view)로 전달.
         request.getRequestDispatcher("/WEB-INF/home.jsp")
         .forward(request, response);
+
+        System.out.println("homeController::doGet() Call");
+
+        request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
     }
+
 }
