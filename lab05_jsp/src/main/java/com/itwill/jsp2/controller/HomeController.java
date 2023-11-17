@@ -29,15 +29,11 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("homeController::doGet()");
-        log.debug("doGet");
+        log.debug("doGet()");
         
         // 요청(request)를 뷰(view)로 전달.
         request.getRequestDispatcher("/WEB-INF/home.jsp")
         .forward(request, response);
-
-        System.out.println("homeController::doGet() Call");
-
-        request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
     }
 
 }
