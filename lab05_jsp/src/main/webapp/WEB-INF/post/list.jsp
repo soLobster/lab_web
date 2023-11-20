@@ -16,26 +16,28 @@
 </head>
 
 <body>
-    <header>
+    <header class="my-2 p-4 bg-dark text-white text-center">
         <h1>포스트 목록 페이지</h1>
     </header>
 
-    <nav>
-        <ul>
-            <li>
+    <nav class="my-2 navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li  class="nav-item">
                 <c:url var="mainPage" value="/"/> <%-- context root --%>
-                <a href="${mainPage}">메인 페이지</a>
+                <a class="nav-link active" href="${mainPage}">메인 페이지</a>
             </li>
-            <li>
+            <li class="nav-item">
                 <c:url var="postCreate" value="/post/create"/>
-                <a href="${postCreate}">새 포스트 작성</a>
+                <a class="nav-link active" href="${postCreate}">새 포스트 작성</a>
             </li>
         </ul>
+    </div>
     </nav>
 
-    <main>
-        <div>
-            <table class="table">
+    <main class="my-2">
+        <div class="card p-2">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>번호</th>
@@ -48,7 +50,12 @@
                     <c:forEach var="p" items="${posts}">
                     <tr>
                         <td>${p.id}</td>
-                        <td>${p.title}</td>
+                        <td>
+                            <c:url var="postDetails" value="/post/details">
+                                    <c:param name="id" value="${p.id}"/>
+                            </c:url>
+                            <a href ="${postDetails}">${p.title}</a>
+                        </td>
                         <td>${p.author}</td>
                         <td>${p.modifiedTime}</td>
                     </tr>

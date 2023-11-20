@@ -16,32 +16,32 @@
 </head>
 
 <body>
-    <header>
+    <header class="my-2 p-4 bg-dark text-white text-center">
         <h1>새 포스트 작성 페이지</h1>
     </header>
 
-    <nav>
-        <ul>
-            <li>
+    <nav class="my-2 navbar navbar-expand-lg bg-body-tertiary">
+        <ul  class="navbar-nav">
+            <li class="nav-item">
                 <c:url var="mainPage" value="/" /> <%-- context root --%>
-                <a href="${mainPage}">메인 페이지</a>
+                <a class="nav-link active" href="${mainPage}">메인 페이지</a>
             </li>
             
-            <li>
+            <li class="nav-item">
                 <c:url var="postList" value="/post/list" /> 
-                <a href="${postList}">포스트 목록 페이지</a>
+                <a class="nav-link active" href="${postList}">포스트 목록 페이지</a>
             </li>
         </ul>
     </nav>
 
-    <main>
-        <div>
+    <main class="my-2 p-2">
+        <div class="card p-2">
             <c:url var="postCreate" value="/post/create"/>
             <form action="${postCreate}" method="post">
-                <div><input type="text" name="title" placeholder="제목" autofocus required/></div>
-                <div><textarea name="content" rows="5" cols="80" placeholder="내용" required></textarea></div>
-                <div><input type="text" name="author" placeholder="작성자" required/></div>
-                <div><input type="submit" value="작성 완료"/></div>
+                <div class="my-3"><input class="form-control" type="text" name="title" placeholder="제목" autofocus required/></div>
+                <div class="my-3"><textarea class="form-control" name="content" rows="5" cols="80" placeholder="내용" required></textarea></div>
+                <div class="my-3"><input class="form-control" type="text" name="author" placeholder="작성자" required/></div>
+                <div class="my-3"><input class="btn btn-success" type="submit" value="작성 완료"/></div>
             </form>
         </div>
     </main>

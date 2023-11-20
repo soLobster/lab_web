@@ -14,15 +14,15 @@
 </head>
 <body>
 
-    <header>
+    <header class="my-2 p-4 bg-dark text-white text-center">
         <h1>메인 페이지입니다.</h1>
     </header>
 
-    <nav>
-        <ul>
-            <li>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <ul class="navbar-nav">
+            <li class="nav-item">
                 <c:url var="postList" value="/post/list"/>
-                <a href="${postList}">포스트 목록 페이지</a>
+                <a class="nav-link active" href="${postList}">포스트 목록 페이지</a>
             </li>
         </ul>
     </nav>
