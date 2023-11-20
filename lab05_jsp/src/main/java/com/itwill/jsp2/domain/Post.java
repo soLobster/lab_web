@@ -18,6 +18,12 @@ public class Post {
     public Post() {
     }
 
+    public Post(String title, String content, String author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
+    
     public Post(Long id, String title, String content, String author, Timestamp createdTime, Timestamp modifiedTime) {
         // 다른 생성자 호출:
         this(id, title, content, author, createdTime.toLocalDateTime(), modifiedTime.toLocalDateTime());
