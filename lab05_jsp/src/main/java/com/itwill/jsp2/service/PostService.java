@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.itwill.jsp2.domain.Post;
 import com.itwill.jsp2.dto.PostCreateDto;
 import com.itwill.jsp2.dto.PostListItemDto;
+import com.itwill.jsp2.dto.PostUpdateDto;
 import com.itwill.jsp2.repository.PostDao;
 
 // Model 2 MVC 아키텍쳐에서 서비스(비즈니스) 계층을 담당하는 클래스.
@@ -45,11 +46,37 @@ public class PostService {
     }
     
     public void create(PostCreateDto dto){
-        log.info("create(dto={})",dto);
+        log.debug("create(dto={})",dto);
         
         // PostCreateDto를 Post 타입으로 변환해서, PostDao의 메서드(insert)를 호출할 때 전달.
-        postDao.insert(dto.toPost());
+        int result = postDao.insert(dto.toPost());
+        
+        log.debug("insert result = {}",result);
     }
     
+    public Post read(Long id) {
+        log.debug("read(id={})",id);
+        
+        Post post = postDao.select(id);
+        
+        log.debug("select result={}", post);
+        
+        return post;
+    }
+    
+    public int delete(Long id) {
+        log.debug("delete(id={})",id);
+        
+        return postDao.delete(id);
+    }
+    
+    public void update(PostUpdateDto dto) {
+        log.debug("update(dto={}",dto);
+        
+        // PostUpdateDto를 Post 타입으로 변환해서, PostDao의 메서드를 호출할 때 전달.
+        int result = postDao.update(dto.toPost());
+        
+        log.debug("update result = {}", result);
+    }
     
 }// end of PostService
