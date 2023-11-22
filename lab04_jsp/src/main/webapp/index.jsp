@@ -14,6 +14,7 @@
     <h2><%= LocalDateTime.now() %></h2>
 
     <ul>
+        <li><a href="exsession">세션(Session)</a></li>
         <li><a href="excookie">쿠키(cookie)</a></li>
         <li><a href="ex1">첫번째 서블릿</a></li> <!-- context Root localhost8081/jsp1/ -->
         <li><a href="ex2">두번째 서블릿</a></li>

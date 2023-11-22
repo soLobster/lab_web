@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-    
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,8 +12,7 @@
 	</head>
 
 	<body>
-		<h1>쿠키</h1>
-        <h2>방문 횟수: ${count}</h2>
+		<h1>Session</h1>
 		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
