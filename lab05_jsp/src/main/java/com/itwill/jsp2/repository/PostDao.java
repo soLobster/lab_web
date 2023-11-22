@@ -1,6 +1,7 @@
 package com.itwill.jsp2.repository;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -92,6 +93,66 @@ public class PostDao {
         return list;
     }
 
+    // POSTS 테이블의 레코드를 입력된 검색어로 검색.
+    
+    private static final String SQL_SELECT_BY_TITLE = 
+            "select * from POSTS where upper(TITLE) like ? order by ID desc";
+    private static final String SQL_SELECT_BY_CONTENT = 
+            "select * from posts where upper(content) like ? order by id desc";
+    private static final String SQL_SELECT_BY_TC = 
+            "select * from posts where upper(title) like ? or upper(content) like ? order by id desc";
+    private static final String SQL_SELECT_BY_AUTHOR = 
+            "select * from posts where upper(author) like ? order by id desc";
+    
+    
+    public List<Post> search(String value, String keyword) {
+        final String searchKeyword = "%" + keyword.toUpperCase() + "%";
+        List<Post> result = new ArrayList<Post>();        
+        log.debug("search (value={})", value);
+        log.debug("search (searchkeyword={})", searchKeyword);
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = ds.getConnection();
+            
+            switch (value){
+            case "t":
+                stmt = conn.prepareStatement(SQL_SELECT_BY_TITLE);
+                stmt.setString(1, searchKeyword);
+                break;
+            case "c":
+                stmt = conn.prepareStatement(SQL_SELECT_BY_CONTENT);
+                stmt.setString(1, searchKeyword);
+                break;
+            case "tc":
+                stmt = conn.prepareStatement(SQL_SELECT_BY_TC);
+                stmt.setString(1, searchKeyword);
+                stmt.setString(2, searchKeyword);
+                break;
+            case "a":
+                stmt = conn.prepareStatement(SQL_SELECT_BY_AUTHOR);
+                stmt.setString(1, searchKeyword);
+                break;
+            }
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                Post post = generatePostFromRS(rs);
+                result.add(post);
+            }
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+        } finally {
+            closeResources(conn, stmt, rs);
+        }
+        
+        return result;
+    }
+    
     // 새 포스트 작성에서 사용되는 SQL 문장
     private static final String SQL_INSERT = "insert into POSTS (TITLE, CONTENT, AUTHOR) values(?,?,?)";
 

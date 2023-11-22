@@ -15,68 +15,86 @@ import com.itwill.jsp2.repository.PostDao;
 
 public class PostService {
     private static final Logger log = LoggerFactory.getLogger(PostService.class);
-    
+
     // singleton 적용.
     private static PostService instance = null;
-    
+
     private PostDao postDao;
-    
+
     private PostService() {
         postDao = PostDao.getInstance();
     }
-    
+
     public static PostService getInstance() {
-        if(instance==null) {
+        if (instance == null) {
             instance = new PostService();
         }
         return instance;
     }
-    
+
     public List<PostListItemDto> read() {
         log.info("read()");
-        
-        // DAO의 메서드를 호출해서 DB Posts 테이블에서 전체 검색 
+
+        // DAO의 메서드를 호출해서 DB Posts 테이블에서 전체 검색
         List<Post> list = postDao.select();
-        
+
         // List<Post>를 List<PostListItemDto>로 변환해서 컨트롤러에게 리턴.
-        // = List<PostListItemDto> result = list.stream().map((x) -> PostListItemDto.fromPost(x)).toList();
+        // = List<PostListItemDto> result = list.stream().map((x) ->
+        // PostListItemDto.fromPost(x)).toList();
         List<PostListItemDto> result = list.stream().map(PostListItemDto::fromPost).toList();
-        
+
         return result;
     }
-    
-    public void create(PostCreateDto dto){
-        log.debug("create(dto={})",dto);
-        
+
+    public void create(PostCreateDto dto) {
+        log.debug("create(dto={})", dto);
+
         // PostCreateDto를 Post 타입으로 변환해서, PostDao의 메서드(insert)를 호출할 때 전달.
         int result = postDao.insert(dto.toPost());
-        
-        log.debug("insert result = {}",result);
+
+        log.debug("insert result = {}", result);
     }
-    
+
     public Post read(Long id) {
-        log.debug("read(id={})",id);
-        
+        log.debug("read(id={})", id);
+
         Post post = postDao.select(id);
-        
+
         log.debug("select result={}", post);
-        
+
         return post;
     }
-    
+
     public int delete(Long id) {
-        log.debug("delete(id={})",id);
-        
+        log.debug("delete(id={})", id);
+
         return postDao.delete(id);
     }
-    
-    public void update(PostUpdateDto dto) {
-        log.debug("update(dto={}",dto);
-        
+
+    public int update(PostUpdateDto dto) {
+        log.debug("update(dto={}", dto);
+
         // PostUpdateDto를 Post 타입으로 변환해서, PostDao의 메서드를 호출할 때 전달.
         int result = postDao.update(dto.toPost());
-        
+
         log.debug("update result = {}", result);
+
+        return result;
     }
-    
+
+    public List<PostListItemDto> search(String value, String keyword) {
+        log.debug("search (value= {})", value);
+        log.debug("search (keyword = {})", keyword);
+
+        List<Post> list = postDao.search(value, keyword);
+
+        log.debug("search result = {}", list.size());
+
+        List<PostListItemDto> result = list.stream().map(PostListItemDto::fromPost).toList();
+
+        log.debug("search result = {}", result);
+
+        return result;
+    }
+
 }// end of PostService
