@@ -10,6 +10,8 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itwill.jsp2.domain.User;
+import com.itwill.jsp2.dto.UserSignInDto;
 import com.itwill.jsp2.service.UserService;
 
 /**
@@ -36,7 +38,29 @@ public class UserSignInController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        log.debug("doPost::Calls");
+        
+        String userid = request.getParameter("userid");
+        String password = request.getParameter("password");
+        
+        UserSignInDto dto = UserSignInDto.builder().userid(userid).password(password).build();
+        
+        log.debug("dto={}",dto);
+        
+        User result = userService.signIn(dto);
+        
+        log.debug("signIn result = {}",result);
+        
+        if(result != null) {
+            response.sendRedirect(request.getContextPath()+"/post/list");
+        } else {
+            String url = request.getContextPath()+"/user/signin";
+            response.sendRedirect(url);
+        }
+        
+       //TODO 요청 파라미터 userid, password를 찾는다.
+        // 서비스 메서드를 호출하면서 로그인 정보를 전달한다.
+        // 성공이면 포스트 목록 페이지로 이동, 실패면 로그인 페이지로 이동.
     }
 
 }

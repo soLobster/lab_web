@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.itwill.jsp2.datasource.DataSourceUtil;
 import com.itwill.jsp2.domain.User;
+import com.itwill.jsp2.dto.UserSignInDto;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class UserDao {
@@ -63,6 +64,43 @@ public class UserDao {
         return result;
     }// end insert(User user) method
 
+    // 로그인 체크 SQL문
+    private static final String SQL_SIGN_IN = 
+            "select userid, password from USERS where userid like ? and password like ?";
+    
+    public User selectByUserIdAndPassword(UserSignInDto dto) {
+        // TODO userid와 password가 일치하면 User 객체를, 일치하지 않으면 null을 리턴
+        log.debug("selectByUserIdAndPassword(UserSignInDto = {})", dto);
+        
+        User user = null;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement(SQL_SIGN_IN);
+            log.debug(SQL_SIGN_IN);
+            stmt.setString(1, dto.getUserid());
+            stmt.setString(2, dto.getPassword());
+            
+            rs = stmt.executeQuery();
+            
+            if(rs.next()) {
+                user = dto.builder().userid(dto.getUserid()).password(dto.getPassword()).build().toUser();
+            }
+            
+        }catch (Exception e) {
+            // TODO: handle exception
+        }finally {
+            closeResources(conn, stmt, rs);
+        }
+        
+        return user;
+    }
+    
     private void closeResources(Connection conn, Statement stmt, ResultSet rs) {
         try {
             if (rs != null) {

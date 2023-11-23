@@ -3,6 +3,8 @@ package com.itwill.jsp2.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itwill.jsp2.domain.User;
+import com.itwill.jsp2.dto.UserSignInDto;
 import com.itwill.jsp2.dto.UserSignUpDto;
 import com.itwill.jsp2.repository.UserDao;
 
@@ -36,5 +38,14 @@ public class UserService {
         }
     }
     
+    public User signIn(UserSignInDto dto) {
+        log.debug("signIn(dto={})", dto);
+        //TODO userid와 password가 일치하면 User 객체, 그렇지 않으면 null를 리턴
+        User user = userDao.selectByUserIdAndPassword(dto);
+        
+        log.debug("signIn User user = {}", user);
+        
+        return user;
+    }
     
 }// end of UserService
