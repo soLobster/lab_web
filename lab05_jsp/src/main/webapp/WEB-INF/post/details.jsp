@@ -20,7 +20,50 @@
         <h1>포스트 상세보기 페이지</h1>
     </header>
 
-    <nav class="my-2"></nav>
+    <nav class="my-2 navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <c:url var="mainPage" value="/" />
+                            <a class="nav-link" href="${mainPage}">홈</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:url var="postList" value="/post/list" />
+                            <a class="nav-link" href="${postList}">포스트 목록</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:url var="postCreate" value="/post/create" />
+                            <a class="nav-link" href="${postCreate}">새 포스트</a>
+                        </li>
+                        <%-- 세션에 signedInUser 속성이 있으면(로그인되어 있으면) --%>
+                        <c:if test="${not empty signedInUser}">
+                            <li class="nav-item">
+                                <c:url var="signOutPage" value="/user/signout"/>
+                                <a class="nav-link" href="${signOutPage}"><span>${signedInUser}</span> 로그아웃</a>
+                            </li>
+                        </c:if>
+                        <%-- 세션에 signedInUser 속성이 없으면(로그인 되어 있지 않으면) --%>
+                        <c:if test="${empty signedInUser}">
+                            <li class="nav-item">
+                            <c:url var="signInPage" value="/user/signin"/>
+                            <a class="nav-link" href="${signInPage}">로그인</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:url var="signUpPage" value="/user/signup"/>
+                            <a class="nav-link" href="${signUpPage}">회원가입</a>
+                        </li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
     <main class="my-2">
         <div class="card">

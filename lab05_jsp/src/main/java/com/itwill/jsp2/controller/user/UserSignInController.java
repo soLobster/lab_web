@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import org.slf4j.Logger;
@@ -30,7 +32,7 @@ public class UserSignInController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       log.debug("doGet::Calls");
+       log.debug("doGet()::Calls");
        
        request.getRequestDispatcher("/WEB-INF/user/signin.jsp").forward(request, response);
     }
@@ -38,7 +40,7 @@ public class UserSignInController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.debug("doPost::Calls");
+        log.debug("doPost()::Calls");
         
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
@@ -47,14 +49,22 @@ public class UserSignInController extends HttpServlet {
         
         log.debug("dto={}",dto);
         
-        User result = userService.signIn(dto);
+        User signedInUser = userService.signIn(dto);
         
-        log.debug("signIn result = {}",result);
+        log.debug("signIn result = {}",signedInUser);
         
-        if(result != null) {
+        if(signedInUser != null) {
+            HttpSession session = request.getSession();
+            
+            // -> 세션이 생성되어 있지 않은 경우에는 새로운 세션 객체를 생성해서 리턴.
+            // -> 세션이 이미 생성되어 있는 경우에는 기존 세션을 리턴.
+            
+            session.setAttribute("signedInUser", signedInUser.getUserid());
+            // -> 세션에 로그인 성공한 사용자의 아이디를 저장.
+            
             response.sendRedirect(request.getContextPath()+"/post/list");
         } else {
-            String url = request.getContextPath()+"/user/signin";
+            String url = request.getContextPath()+"/user/signin?result=fail";
             response.sendRedirect(url);
         }
         

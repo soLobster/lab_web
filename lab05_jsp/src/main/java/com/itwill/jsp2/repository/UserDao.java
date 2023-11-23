@@ -23,7 +23,8 @@ public class UserDao {
     // Singleton
     private static UserDao instance = null;
 
-    private UserDao() {}
+    private UserDao() {
+    }
 
     public static UserDao getInstance() {
         if (instance == null) {
@@ -33,8 +34,7 @@ public class UserDao {
     }// end of Singleton
 
     // 회원 가입시 필요한 SQL 문
-    private static final String SQL_SIGN_UP = 
-            "insert into USERS (USERID, PASSWORD, EMAIL) values (?,?,?)";
+    private static final String SQL_SIGN_UP = "insert into USERS (USERID, PASSWORD, EMAIL) values (?,?,?)";
 
     // 회원 가입 메서드 인서트된 행의 갯수를 리턴하겠다.
     public int insert(User user) {
@@ -65,42 +65,41 @@ public class UserDao {
     }// end insert(User user) method
 
     // 로그인 체크 SQL문
-    private static final String SQL_SIGN_IN = 
-            "select userid, password from USERS where userid like ? and password like ?";
-    
+    private static final String SQL_SIGN_IN = "select * from USERS where USERID = ? and PASSWORD = ?";
+
     public User selectByUserIdAndPassword(UserSignInDto dto) {
         // TODO userid와 password가 일치하면 User 객체를, 일치하지 않으면 null을 리턴
         log.debug("selectByUserIdAndPassword(UserSignInDto = {})", dto);
-        
+
         User user = null;
-        
+
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
+
         try {
-            
+
             conn = ds.getConnection();
             stmt = conn.prepareStatement(SQL_SIGN_IN);
             log.debug(SQL_SIGN_IN);
             stmt.setString(1, dto.getUserid());
             stmt.setString(2, dto.getPassword());
-            
+
             rs = stmt.executeQuery();
-            
-            if(rs.next()) {
-                user = dto.builder().userid(dto.getUserid()).password(dto.getPassword()).build().toUser();
+
+            if (rs.next()) {
+                user = generateUserFromRS(rs);
             }
-            
-        }catch (Exception e) {
+
+        } catch (Exception e) {
             // TODO: handle exception
-        }finally {
+        } finally {
             closeResources(conn, stmt, rs);
         }
-        
+
         return user;
     }
-    
+
     private void closeResources(Connection conn, Statement stmt, ResultSet rs) {
         try {
             if (rs != null) {
@@ -117,6 +116,16 @@ public class UserDao {
         }
 
     }// end of closeResources(arg 3)
+
+    private User generateUserFromRS(ResultSet rs) throws SQLException {
+        Long id = rs.getLong("ID");
+        String userid = rs.getString("USERID");
+        String password = rs.getString("PASSWORD");
+        String email = rs.getString("EMAIL");
+        Long points = rs.getLong("POINTS");
+
+        return User.builder().id(id).userid(userid).password(password).email(email).points(points).build();
+    }
 
     private void closeResources(Connection conn, Statement stmt) {
         closeResources(conn, stmt, null);
