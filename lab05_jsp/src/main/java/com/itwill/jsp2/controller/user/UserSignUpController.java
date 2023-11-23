@@ -63,7 +63,7 @@ public class UserSignUpController extends HttpServlet {
             response.sendRedirect(request.getContextPath()); 
             // request.getContextPath() => Context Root로 리다이렉트하는 메서드
         } else { // 가입 실패
-            String url = request.getContextPath()+"/user/signup";
+            String url = request.getContextPath()+"/user/signup?result=fail";
             response.sendRedirect(url); // 회원 가입 페이지로 이동.
         }
         

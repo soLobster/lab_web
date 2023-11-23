@@ -21,6 +21,9 @@
         <main>
             <div class ="m-4 card">
                 <div class = "my-2 p-4 card-body">
+                <c:if test="${not empty param.result && param.result eq 'fail'}">
+                    <div class ="fs-3 text-danger">회원 가입 양식을 다시 작성하세요....</div>
+                </c:if>
                     <form method = "post"> <%-- action 속성의 기본값은 현재 URL --%>
                         <div class = "my-2"><input class="form-control" type ="text" name="userid" placeholder="아이디를 입력하세요" required autofocus /></div>
                         <div class = "my-2"><input class="form-control" type ="text" name="password" placeholder="비밀번호를 입력하세요" required /></div>
