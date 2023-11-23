@@ -1,5 +1,7 @@
 package com.itwill.jsp2.dto;
 
+import com.itwill.jsp2.domain.User;
+
 public class UserSignUpDto {
     private String userid;
     private String password;
@@ -44,6 +46,13 @@ public class UserSignUpDto {
         return "UserSignUpDto [userid=" + userid + ", password=" + password + ", email=" + email + "]";
     }
 
+    public User toUser() {
+        
+        return User.builder()
+                .userid(userid).password(password).email(email)
+                .build();
+    }// UserSignDto Object type to User Object type Transfer
+    
     
     // --- Builder Pattern
     public static UserSignDtoBuilder builder() {

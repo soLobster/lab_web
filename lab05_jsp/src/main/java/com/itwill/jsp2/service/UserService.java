@@ -4,10 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.itwill.jsp2.dto.UserSignUpDto;
+import com.itwill.jsp2.repository.UserDao;
 
 public class UserService {
     
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
+    
+    private final UserDao userDao = UserDao.getInstance();
     
     // singleton
     private static UserService instance = null;
@@ -22,9 +25,15 @@ public class UserService {
     }//end of UserService Singleton
     
     public boolean signUp(UserSignUpDto dto) {
-        // 
+        log.debug("signUp(dto={})",dto);
+         
+        int result = userDao.insert(dto.toUser());
         
-        return false;
+        if(result == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     
