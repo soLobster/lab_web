@@ -24,7 +24,7 @@ public class UserService {
             instance = new UserService();
         }
         return instance;
-    }//end of UserService Singleton
+    }// end of UserService Singleton
     
     public boolean signUp(UserSignUpDto dto) {
         log.debug("signUp(dto={})",dto);
@@ -40,7 +40,7 @@ public class UserService {
     
     public User signIn(UserSignInDto dto) {
         log.debug("signIn(dto={})", dto);
-        //TODO userid와 password가 일치하면 User 객체, 그렇지 않으면 null를 리턴
+        /* userid와 password가 일치하면 User 객체, 그렇지 않으면 null를 리턴 */
         User user = userDao.selectByUserIdAndPassword(dto);
         
         log.debug("signIn User user = {}", user);
@@ -48,4 +48,4 @@ public class UserService {
         return user;
     }
     
-}// end of UserService
+}/* end of UserService */

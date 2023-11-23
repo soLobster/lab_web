@@ -8,7 +8,6 @@ public class UserSignUpDto {
     private String email;
 
     public UserSignUpDto() {
-        // TODO Auto-generated constructor stub
     }
 
     public UserSignUpDto(String userid, String password, String email) {
@@ -47,13 +46,13 @@ public class UserSignUpDto {
     }
 
     public User toUser() {
-        
+
         return User.builder()
                 .userid(userid).password(password).email(email)
                 .build();
     }// UserSignDto Object type to User Object type Transfer
-    
-    
+
+
     // --- Builder Pattern
     public static UserSignDtoBuilder builder() {
         return new UserSignDtoBuilder();
