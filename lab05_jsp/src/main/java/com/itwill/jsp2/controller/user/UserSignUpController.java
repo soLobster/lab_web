@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.itwill.jsp2.dto.UserSignUpDto;
+import com.itwill.jsp2.service.UserService;
 
 /**
  * Servlet implementation class UserSignUpController
@@ -20,6 +21,7 @@ public class UserSignUpController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(UserSignUpController.class);
     
+    private final UserService userService = UserService.getInstance();
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -54,8 +56,17 @@ public class UserSignUpController extends HttpServlet {
         log.debug("dto={}",dto);
         
         // 회원 가입 정보를 서비스 메서드를 호출하면서 전달한다.
+        boolean result = userService.signUp(dto);
         
         // 뷰로 이동.
+        if(result) { // 가입 성공
+            response.sendRedirect(request.getContextPath()); 
+            // request.getContextPath() => Context Root로 리다이렉트하는 메서드
+        } else { // 가입 실패
+            String url = request.getContextPath()+"/user/signup";
+            response.sendRedirect(url); // 회원 가입 페이지로 이동.
+        }
+        
     }
 
 }
