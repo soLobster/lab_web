@@ -41,6 +41,10 @@
                             name="password" placeholder="비밀번호를 입력하세요"
                             required />
                     </div>
+                    <div class = "d-none">
+                        <input type ="text" name="target" value="${param.target}" readonly/>
+                    </div>
+                    
                     <div class="my-2">
                         <input class="form-control btn btn-primary"
                             type="submit" value="로그인" />

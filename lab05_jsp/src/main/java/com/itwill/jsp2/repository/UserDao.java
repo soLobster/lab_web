@@ -56,7 +56,7 @@ public class UserDao {
                                            // select executeQuery
 
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         } finally {
             closeResources(conn, stmt);
         }
@@ -92,13 +92,47 @@ public class UserDao {
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         } finally {
             closeResources(conn, stmt, rs);
         }
 
         return user;
     }
+    
+    // 사용자가 포스트를 작성했을 때 포인트를 x 포인트를 지급하는 SQL 문장 
+    private static final String SQL_UPDATE_POINT = 
+            "update USERS set POINTS = POINTS + ? where USERID = ?";
+    
+    public int updatePoints(int point, String userid) {
+        log.debug("updatePoints point= {}", point);
+        log.debug("updatePoints userid= {}", userid);
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        int result = 0;
+        
+        try {
+            
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE_POINT);
+            log.debug(SQL_UPDATE_POINT);
+            stmt.setInt(1, point);
+            stmt.setString(2, userid);
+            
+            result = stmt.executeUpdate();
+            log.debug("Point Update result = {}",result);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }
+    
 
     private void closeResources(Connection conn, Statement stmt, ResultSet rs) {
         try {
@@ -112,7 +146,7 @@ public class UserDao {
                 conn.close();
             }
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
 
     }// end of closeResources(arg 3)

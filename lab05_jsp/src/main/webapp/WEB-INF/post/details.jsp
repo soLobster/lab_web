@@ -101,12 +101,16 @@
                         readonly />
                 </div>
             </form>
-            <div class ="card-footer">
-                <c:url var="postModify" value="/post/modify">
-                    <c:param name="id" value ="${post.id}"></c:param>
-                </c:url>
-                <a class="btn btn-primary form-control" href="${postModify}">수정</a>
-            </div>
+            <%-- 로그인한 사용자 아이디와 포스트 작성자 아이디가 같은 경우에만 
+                 수정 버튼을 보여줌. --%>
+            <c:if test ="${signedInUser == post.author}">
+                <div class ="card-footer">
+                    <c:url var="postModify" value="/post/modify">
+                        <c:param name="id" value ="${post.id}"></c:param>
+                    </c:url>
+                    <a class="btn btn-primary form-control" href="${postModify}">수정</a>
+                </div>
+            </c:if>
         </div>
     </main>
 
