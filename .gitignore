@@ -6,3 +6,4 @@
 */.gitignore
 */build
 */target
+*/DS_Store
