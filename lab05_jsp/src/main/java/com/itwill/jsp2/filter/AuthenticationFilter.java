@@ -13,7 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
+import org.apache.tomcat.util.buf.Utf8Encoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,10 +55,30 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 
         HttpSession session = ((HttpServletRequest) request).getSession(); // 부모 ServletRequest -> 자식 HttpServletRequest
                                                                            // 형변환
+        // 필터로 들어온 요청(request)의 정보(요청 주소,...)
+        // log.debug("URL >> {}", ((HttpServletRequest) request).getRequestURL()); // ex
+        // -> URL >> http://localhost:8081/jsp2/post/details
+        // log.debug("URI >> {}", ((HttpServletRequest) request).getRequestURI()); // ex
+        // -> URI >> /jsp2/post/details
+        // log.debug("query String >> {}", ((HttpServletRequest)
+        // request).getQueryString()); // ex -> query String >> id=26
+
+        String reqUrl = ((HttpServletRequest) request).getRequestURL().toString(); // 요청 주소(URL)
+        String qs = ((HttpServletRequest) request).getQueryString(); // 질의 문자열 (Query String)
+
+        String target = "";
+
+        if (qs == null) { // 질의 문자열이 없는 경우
+            target = URLEncoder.encode(reqUrl, "UTF-8");
+        } else { // 질의 문자열이 있는 경우
+            target = URLEncoder.encode(reqUrl + "?" + qs, "UTF-8");
+        }
+
         Object signedInUser = session.getAttribute("signedInUser");
+
         if (signedInUser == null) { // 로그인 안 된 상태
             log.debug("Log-Out ---> Log-In Page Redirect");
-            String url = ((HttpServletRequest) request).getContextPath() + "/user/signin"; // 로그인 페이지
+            String url = ((HttpServletRequest) request).getContextPath() + "/user/signin?target=" + target; // 로그인 페이지
             ((HttpServletResponse) response).sendRedirect(url); // 부모 ServletResponse -> 자식 HttpServletResponse 형변환
         } else { // 로그인 된 상태
             log.debug("Log-In > {}", signedInUser);
