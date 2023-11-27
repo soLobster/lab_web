@@ -35,7 +35,6 @@ public class UserSignInController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         log.debug("doGet()::Calls");
-
         request.getRequestDispatcher("/WEB-INF/user/signin.jsp").forward(request, response);
     }
 
