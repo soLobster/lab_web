@@ -16,7 +16,7 @@ import oracle.jdbc.OracleDriver;
 @Slf4j // log4j-slf4j2를 이용한 로그 출력. -> Logger 타입 객체 생성.
 @ExtendWith(SpringExtension.class) // Spring JUnit 테스트를 실행하는 메인 클래스
 @ContextConfiguration(
-        locations = {"file:/src/main/webapp/WEB-INF/application-context.xml"}
+        locations = {"file:src/main/webapp/WEB-INF/application-context.xml"}
 ) // 스프링 컨텍스트(환경 변수) 파일의 경로(이름)
 public class JdbcTest {
 
