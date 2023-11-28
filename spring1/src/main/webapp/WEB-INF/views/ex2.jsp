@@ -19,16 +19,20 @@
     <header>
         <h1>EX_2</h1>
     </header>
-    
+
     <nav>
-        <li>
-            <c:url var="homePage" value="/"/>
-            <a href="${homePage}">메인 페이지</a>
-        </li>
+        <ul>
+            <li><c:url var="homePage" value="/" /> <a
+                href="${homePage}">메인 페이지</a></li>
+            <li><c:url var="ex1Page" value="/ex1" /> <a
+                href="${ex1Page}">ex1_Page</a></li>
+        </ul>
     </nav>
 
     <main>
         <h2>요청 처리 결과</h2>
+        <div>dto: ${dto}</div>
+
     </main>
 
     <script
