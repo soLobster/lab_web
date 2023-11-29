@@ -19,12 +19,12 @@ import lombok.extern.slf4j.Slf4j;
 // -> PostController의 컨트롤러 메서드의 매핑 URL(주소)는 "/post"로 시작
 public class PostController {
 
+    @Autowired
     private PostService postService;
     
-    @Autowired
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
+//    public PostController(PostService postService) {
+//        this.postService = postService;
+//    }
 
     @GetMapping("/list") // -> Get 방식의 "/post/list" 요청 주소를 처리하는 메서드.
     public void list(Model model) {
