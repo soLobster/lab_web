@@ -46,5 +46,9 @@
     <!-- PostDao, UserDao 인터페이스들을 작성하는 패키지. -->
     <mybatis:scan base-package="com.itwill.spring2.repository"/>
 
+    <!-- 스프링 컨테이너에서 Component Bean(ex: @Service, @Component, ...) 들을 검색할 기본 패키지를 설정-->
+    <!-- 스캔하는 컨텍스트는 servlet이나 application 둘 중 하나에만 선언하는것이 좋다. -->
+    <!-- 컨트롤러 생성은 Servlet-context에 나머진 Application에 선언한다. 사실 Applicaion-context에 다 때려박아도 상관은 없다. -->
+    <context:component-scan base-package="com.itwill.spring2.service" />
 
 </beans>
