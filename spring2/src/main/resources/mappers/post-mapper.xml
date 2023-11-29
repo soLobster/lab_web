@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- POSTS 테이블에서 CRUD에 필요한 SQL 문장들을 선언 -->
+<mapper namespace="com.itwill.spring2.repository.PostDao">
+
+    <!-- POSTS 테이블 전체 검색, 아이디 내림차순 정렬 -->
+    <!-- mybatis-config.xml 파일에서 typeAlias 설정 -> resultType alias -->
+    <select id = "selectOrderByIdDesc" resultType="Post">
+       select * from POSTS order by ID desc
+    </select>
+    
+    <!-- POSTS 테이블에서 아이디(PK)로 검색 -->
+    <select id = "selectById" resultType = "Post">
+        select * from POSTS where ID = #{id} <!-- #{} = '?' -->
+    </select>
+    
+    <!-- POSTS 테이블에 새 포스트 insert (새글 작성) -->
+    <insert id="insert">
+        insert into POSTS (TITLE, CONTENT, AUTHOR) values (#{title}, #{content}, #{author}) 
+        <!-- values안의 #{}은 대소문자를 구분한다. 따라서 domain의 필드와 같게 써야한다 -->
+    </insert>
+    
+    <update id="update">
+        update POSTS set TITLE = #{title} , CONTENT = #{content} , MODIFIED_TIME = systimestamp where ID = #{id}
+    </update>
+    
+    <delete id="delete">
+        delete from POSTS where ID = ${id}
+    </delete>
+    
+    
+</mapper>

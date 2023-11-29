@@ -6,6 +6,7 @@
     <display-name>spring2</display-name>
     
     <!-- Context Parameter(WAS의 환결 설정 변수) 설정 -->
+    <!-- 톰캣의 Context -->
     <!-- 스프링 컨텍스트를 저장한 파일 위치를 설정 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
