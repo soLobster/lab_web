@@ -2,6 +2,7 @@ package com.itwill.spring2.web;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 public class PostController {
 
     private PostService postService;
-
+    
+    @Autowired
     public PostController(PostService postService) {
         this.postService = postService;
     }
@@ -31,11 +33,11 @@ public class PostController {
         
         // TODO: postService의 메서드를 호출해서 포스트 목록을 만들고, 뷰에 전달.
         List<Post> postList = postService.read();
-        model.addAttribute("list", postList);
+        model.addAttribute("postList", postList);
         
+        log.debug(postList.toString());
         
         // 리턴 값이 없으면 요청 경로로 JSP를 찾음.
         // WEB-INF/views/post/list.jsp
-
     }
 }

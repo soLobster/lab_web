@@ -2,6 +2,7 @@ package com.itwill.spring2.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwill.spring2.domain.Post;
@@ -15,6 +16,7 @@ public class PostService {
     // PostDao를 주입 받음.
     private PostDao postDao;
     
+    @Autowired
     public PostService(PostDao postDao) {
         this.postDao = postDao;
     }

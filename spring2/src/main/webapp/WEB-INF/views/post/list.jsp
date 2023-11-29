@@ -21,26 +21,26 @@
     </header>
 
     <main>
-        <table>
+        <table class="table table-striped card-body">
             <thead>
                 <tr>
                     <th>번호</th>
                     <th>제목</th>
                     <th>작성자</th>
+                    <th>작성시간</th>
                     <th>수정시간</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="p" items="${list}"></c:forEach>
+                <c:forEach var="p" items="${postList}">
                 <tr>
                     <td>${p.id}</td>
-                    <td><c:url var="postDetails"
-                            value="/post/list">
-                            <c:param name="id" value="${p.id}" />
-                        </c:url> <a href="${postDetails}">${p.title}</a></td>
+                    <td>${p.title}</td>
                     <td>${p.author}</td>
-                    <td>${p.modifiedTime}</td>
+                    <td>${p.created_time}</td>
+                    <td>${p.modified_time}</td>                                        
                 </tr>
+                </c:forEach>
             </tbody>
         </table>
     </main>
