@@ -28,7 +28,6 @@
                     <th>제목</th>
                     <th>작성자</th>
                     <th>작성시간</th>
-                    <th>수정시간</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,8 +36,7 @@
                     <td>${p.id}</td>
                     <td>${p.title}</td>
                     <td>${p.author}</td>
-                    <td>${p.created_time}</td>
-                    <td>${p.modified_time}</td>                                        
+                    <td>${p.created_time}</td>                            
                 </tr>
                 </c:forEach>
             </tbody>
