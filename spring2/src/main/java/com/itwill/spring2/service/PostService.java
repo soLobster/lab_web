@@ -16,20 +16,19 @@ public class PostService {
     // PostDao를 주입 받음.
     @Autowired
     private PostDao postDao;
-    
 
 //    public PostService(PostDao postDao) {
 //        this.postDao = postDao;
 //    }
-    
-    public List<Post> read(){
-        //TODO postDao의 메서드를 호출해서 포스트 목록을 리턴받고,
+
+    public List<Post> read() {
+        // postDao의 메서드를 호출해서 포스트 목록을 리턴받고,
         List<Post> list = postDao.selectOrderByIdDesc();
-        
-        log.debug("list = {}",list);
-        
-        //TODO 컨트롤러에게 리턴해준다.
-        
+
+        log.debug("list = {}", list);
+
+        // 컨트롤러에게 리턴해준다.
+
         return list;
     }
 }

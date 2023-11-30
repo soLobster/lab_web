@@ -21,7 +21,7 @@ public class PostController {
 
     @Autowired
     private PostService postService;
-    
+
 //    public PostController(PostService postService) {
 //        this.postService = postService;
 //    }
@@ -30,13 +30,12 @@ public class PostController {
     public void list(Model model) {
         log.debug("list()");
 
-        
-        // TODO: postService의 메서드를 호출해서 포스트 목록을 만들고, 뷰에 전달.
+        // postService의 메서드를 호출해서 포스트 목록을 만들고, 뷰에 전달.
         List<Post> postList = postService.read();
         model.addAttribute("postList", postList);
-        
+
         log.debug(postList.toString());
-        
+
         // 리턴 값이 없으면 요청 경로로 JSP를 찾음.
         // WEB-INF/views/post/list.jsp
     }

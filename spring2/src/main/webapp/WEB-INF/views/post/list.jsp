@@ -32,12 +32,12 @@
             </thead>
             <tbody>
                 <c:forEach var="p" items="${postList}">
-                <tr>
-                    <td>${p.id}</td>
-                    <td>${p.title}</td>
-                    <td>${p.author}</td>
-                    <td>${p.created_time}</td>                            
-                </tr>
+                    <tr>
+                        <td>${p.id}</td>
+                        <td>${p.title}</td>
+                        <td>${p.author}</td>
+                        <td>${p.created_time}</td>
+                    </tr>
                 </c:forEach>
             </tbody>
         </table>

@@ -27,28 +27,31 @@
         <constructor-arg ref="hikariConfig" />
     </bean>
 
-    <!--
-        (MyBatis가 가지고 있음) SqlSessionFactoryBean 클래스: 
-        DataSource(Connection Pool)을 이용해서 SQL 문장들을 실행/결과 처리를 하고 리턴하는 객체. 
-    -->
-    <bean id = "session" class = "org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="ds"/> 
-        <!-- 
-            위의 <bean id="ds" class="com.zaxxer.hikari.HikariDataSource"> <constructor-arg ref="hikariConfig" /> </bean> 
-            를 찾아간다
-        -->
-        <property name="mapperLocations" value="classpath:/mappers/**/*.xml" /> 
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    <!-- (MyBatis가 가지고 있음) SqlSessionFactoryBean 클래스: DataSource(Connection 
+        Pool)을 이용해서 SQL 문장들을 실행/결과 처리를 하고 리턴하는 객체. -->
+    <bean id="session"
+        class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="ds" />
+        <!-- 위의 <bean id="ds" class="com.zaxxer.hikari.HikariDataSource"> 
+            <constructor-arg ref="hikariConfig" /> </bean> 를 찾아간다 -->
+        <property name="mapperLocations"
+            value="classpath:/mappers/**/*.xml" />
+        <property name="configLocation"
+            value="classpath:mybatis-config.xml" />
         <!-- '/**' 는 하위 폴더가 몇 개 인지 상관 안한다 -->
     </bean>
 
     <!-- MyBatis 프레임워크에서 생성하고 관리하는 bean들을 base-package와 sub-package에서 찾겠다. -->
     <!-- PostDao, UserDao 인터페이스들을 작성하는 패키지. -->
-    <mybatis:scan base-package="com.itwill.spring2.repository"/>
+    <mybatis:scan
+        base-package="com.itwill.spring2.repository" />
 
-    <!-- 스프링 컨테이너에서 Component Bean(ex: @Service, @Component, ...) 들을 검색할 기본 패키지를 설정-->
+    <!-- 스프링 컨테이너에서 Component Bean(ex: @Service, @Component, ...) 들을 검색할 
+        기본 패키지를 설정 -->
     <!-- 스캔하는 컨텍스트는 servlet이나 application 둘 중 하나에만 선언하는것이 좋다. -->
-    <!-- 컨트롤러 생성은 Servlet-context에 나머진 Application에 선언한다. 사실 Applicaion-context에 다 때려박아도 상관은 없다. -->
-    <context:component-scan base-package="com.itwill.spring2.service" />
+    <!-- 컨트롤러 생성은 Servlet-context에 나머진 Application에 선언한다. 사실 Applicaion-context에 
+        다 때려박아도 상관은 없다. -->
+    <context:component-scan
+        base-package="com.itwill.spring2.service" />
 
 </beans>
