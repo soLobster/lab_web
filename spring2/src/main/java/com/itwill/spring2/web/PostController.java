@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 // -> PostController의 컨트롤러 메서드의 매핑 URL(주소)는 "/post"로 시작
 public class PostController {
 
+    // PostService 객체를 주입 받음.
     @Autowired
     private PostService postService;
 
@@ -33,7 +34,8 @@ public class PostController {
         // postService의 메서드를 호출해서 포스트 목록을 만들고, 뷰에 전달.
         List<Post> postList = postService.read();
         model.addAttribute("postList", postList);
-
+        // Model.addAttribute(String attributeName, @Nullable Object attributeValue) 
+        // name => JSP 에서 쓰는 것.
         log.debug(postList.toString());
 
         // 리턴 값이 없으면 요청 경로로 JSP를 찾음.

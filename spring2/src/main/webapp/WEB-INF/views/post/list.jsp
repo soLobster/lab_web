@@ -16,31 +16,33 @@
 </head>
 
 <body>
-    <header>
+    <header class="my-2 p-4 bg-dark text-white text-center">
         <h1>포스트 목록 페이지</h1>
     </header>
 
     <main>
-        <table class="table table-striped card-body">
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성시간</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="p" items="${postList}">
+        <div>
+            <table class="table table-striped card-body">
+                <thead>
                     <tr>
-                        <td>${p.id}</td>
-                        <td>${p.title}</td>
-                        <td>${p.author}</td>
-                        <td>${p.created_time}</td>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성시간</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:forEach var="p" items="${postList}">
+                        <tr>
+                            <td>${p.id}</td>
+                            <td>${p.title}</td>
+                            <td>${p.author}</td>
+                            <td>${p.created_time}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </main>
 
     <script

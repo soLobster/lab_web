@@ -22,10 +22,13 @@ public class PostService {
 //    }
 
     public List<Post> read() {
+        log.debug("read()");
+        
         // postDao의 메서드를 호출해서 포스트 목록을 리턴받고,
         List<Post> list = postDao.selectOrderByIdDesc();
 
-        log.debug("list = {}", list);
+        log.debug("List = {}", list);
+        log.debug("Number Of List = {}", list.size());
 
         // 컨트롤러에게 리턴해준다.
 
