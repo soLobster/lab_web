@@ -90,8 +90,7 @@ public class PostController {
         log.debug("PostController-search = {}", list);
         
         model.addAttribute("postList", list);
-        
-        
+
         return "/post/list";
     }
     
