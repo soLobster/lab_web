@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.spring2.domain.Post;
 import com.itwill.spring2.dto.post.PostCreateDto;
 import com.itwill.spring2.dto.post.PostListItemDto;
+import com.itwill.spring2.dto.post.PostUpdateDto;
 import com.itwill.spring2.service.PostService;
 
 import lombok.RequiredArgsConstructor;
@@ -62,10 +63,47 @@ public class PostController {
         model.addAttribute("post", post);     
     }
     
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name="id") Long id, Model model) {
+        log.debug("Get Delete(id = {})",id);
+        
+        int post = postService.delete(id);
+        
+        model.addAttribute("id", post);
+        
+        return "redirect:/post/list";
+    }
+    
+    
     @GetMapping("/create")
     public void create() {
         log.debug("Get create()");
     }
+    
+    @GetMapping("/search")
+    public String search(@RequestParam(name="category") String value, 
+            @RequestParam(name="keyword") String keyword, Model model) {
+        log.debug("Get Search()");
+        
+        List<PostListItemDto> list =  postService.search(value, keyword);
+        
+        log.debug("PostController-search = {}", list);
+        
+        model.addAttribute("postList", list);
+        
+        
+        return "/post/list";
+    }
+    
+    @PostMapping("/update")
+    public String update(PostUpdateDto dto) {
+        log.debug("Post update(PostUpdateDto dto) = {}",dto);
+        
+        postService.update(dto);
+        
+        return "redirect:/post/list";
+    }
+    
     
     @PostMapping("/create")
     public String create(PostCreateDto dto) {

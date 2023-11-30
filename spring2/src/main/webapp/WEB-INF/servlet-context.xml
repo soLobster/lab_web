@@ -25,7 +25,7 @@
 
     <!-- Spring MVC에서 dispatcherServlet이 처리하지 않는 정적 요청에 필요한 파일들 (images, 
         css, javascript, ...)이 있는 폴더 위치를 설정. 정적 리소스(이미지, css, js)의 폴더를 /webapp/static/ 
-        폴더 아래에 생성. -->
+        태그를 보고 찾아감. 폴더 아래에 생성. -->
     <mvc:resources location="/static/" mapping="/**" />
 
     <!-- 뷰 리졸버(view resolver): Spring MVC에서 사용하는 뷰(ex: jsp)를 찾귀 위한 설정. -->

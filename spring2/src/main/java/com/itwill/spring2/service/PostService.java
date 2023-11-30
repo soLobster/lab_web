@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.spring2.domain.Post;
 import com.itwill.spring2.dto.post.PostCreateDto;
 import com.itwill.spring2.dto.post.PostListItemDto;
+import com.itwill.spring2.dto.post.PostUpdateDto;
 import com.itwill.spring2.repository.PostDao;
 
 import lombok.RequiredArgsConstructor;
@@ -53,6 +54,30 @@ public class PostService {
         
         return result;
     }// end create(dto)
+    
+    public int update(PostUpdateDto dto) {
+        log.debug("PostService - update(dto={})",dto);
+        
+        int result = postDao.update(dto.toEntity());
+        
+        return result;
+    }
+    
+    public int delete(long id) {
+        log.debug("PostService - Delete(dto={})", id);
+        
+        int result = postDao.delete(id);
+        
+        return result;
+    }
+    
+    public List<PostListItemDto> search(String value, String keyword){
+        log.debug("PostService - search(category = {}, keyword = {})", value, keyword);
+        
+        List<Post> list = postDao.selectByCategory(value, keyword);
+        
+        return list.stream().map(PostListItemDto::fromEntity).toList();
+    }
     
     public Post details(long id) {
         log.debug("PostService_details(id = {})", id);

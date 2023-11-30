@@ -25,17 +25,17 @@
 
         <main class="my-2">
             <div class="card">
-                <form class="card-body">
+                <form class="card-body" id="postModifyForm">
                     <div class="d-none my-2">
-                        <label for="id" class="form-label">번호</label> <input
-                            class="form-control" id="id" type="text"
+                        <label for="id" class="form-label">번호</label> 
+                        <input class="form-control" id="id" type="text"
                             name="id" value="${post.id}" readonly />
                     </div>
                     <div class="my-2">
                         <label for="title" class="form-label">제목</label>
                         <input class="form-control" id="title"
-                            name="title" type="text"
-                            value="${post.title}" autofocus="autofocus" />
+                            name="title" type="text" value="${post.title}" 
+                            autofocus="autofocus" />
                     </div>
                     <div class="my-2">
                         <label for="content" class="form-label">내용</label>
@@ -49,8 +49,8 @@
                     </div>
                 </form>
                 <div class="card-footer">
-                    <button class="btn btn-danger">삭제</button>
-                    <button class="btn btn-success">수정</button>
+                    <button class="btn btn-danger" id="btnDelete">삭제</button>
+                    <button class="btn btn-success" id="btnUpdate">수정</button>
                 </div>
             </div>
         </main>
@@ -59,6 +59,8 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
+            
+        <script src="../js/post-modify.js"></script>    
     </div>
 </body>
 </html>

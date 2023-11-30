@@ -8,6 +8,8 @@ public interface PostDao { // 추상 메서드
 
     List<Post> selectOrderByIdDesc();
 
+    List<Post> selectByCategory(String value, String keyword);
+    
     Post selectById(long id);
 
     int insert(Post post);

@@ -27,6 +27,20 @@
         <main class="my-2">
         <!-- post list table -->
             <div class="card">
+            <div class="card-header my-2">
+                    <c:url var = "searchPage" value ="/post/search"/>
+                    <form action = "${searchPage}" class="d-flex" role="search">
+                        <select class="form-select " aria-label="Small select example" name="category">
+                            <option selected>검색 주제 선택</option>
+                            <option value="t">제목</option>
+                            <option value="c">내용</option>
+                            <option value="tc">제목+내용</option>
+                            <option value="a">작성자</option>
+                        </select>
+                        <input class="form-control me-2" name="keyword" type="text" placeholder="Search" aria-label="Search" required autofocus/>
+                        <input class="btn btn-primary" value="Search" type="submit"/>
+                    </form>
+                </div>
                 <table class="table table-striped table-hover card-body">
                     <thead>
                         <tr>
