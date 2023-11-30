@@ -16,25 +16,21 @@
 </head>
 
 <body>
-    <header>
-        <h1>HOME PAGE ^^</h1>
-    </header>
+    <div class="container-fluid">
+        <c:set var="title" value="메인" /> <!-- 'set' 변수를 만들어줌 -->
+        <!-- 페이지 header - title -->
+        <%@ include file = "fragments/title.jspf"%>
+        
+        <!-- navigation menu -->
+        <%@ include file = "fragments/navigation.jspf" %>
+        
+        <!-- main -->
+        <main></main>
 
-
-    <nav>
-        <ul>
-            <li><c:url var="postListPage" value="/post/list" /> <a
-                href="${postListPage}">포스트 목록</a></li>
-        </ul>
-    </nav>
-
-
-
-
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>

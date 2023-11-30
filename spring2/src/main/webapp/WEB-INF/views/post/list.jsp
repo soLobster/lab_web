@@ -16,38 +16,49 @@
 </head>
 
 <body>
-    <header class="my-2 p-4 bg-dark text-white text-center">
-        <h1>포스트 목록 페이지</h1>
-    </header>
-
-    <main>
-        <div>
-            <table class="table table-striped card-body">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성시간</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="p" items="${postList}">
+    <div class="container-fluid">
+    <!-- header -->
+    <c:set var="title" value="포스트 목록"/>
+    <%@ include file="../fragments/title.jspf" %>
+    
+    <!-- navigation -->
+    <%@ include file="../fragments/navigation.jspf" %>
+    
+        <main class="my-2">
+        <!-- post list table -->
+            <div class="card">
+                <table class="table table-striped table-hover card-body">
+                    <thead>
                         <tr>
-                            <td>${p.id}</td>
-                            <td>${p.title}</td>
-                            <td>${p.author}</td>
-                            <td>${p.created_time}</td>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>수정시간</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
-    </main>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="p" items="${postList}">
+                            <tr>
+                                <td>${p.id}</td>
+                                <td>
+                                    <c:url var="postDetailsPage" value="/post/details" >
+                                        <c:param name="id" value="${p.id}"/>
+                                    </c:url>
+                                    <a href="${postDetailsPage}">${p.title}</a>
+                                </td>
+                                <td>${p.author}</td>
+                                <td>${p.modifiedTime}</td> <!-- DTO의 필드 이름으로 해야한다. -->
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </main>
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>
