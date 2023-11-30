@@ -13,6 +13,8 @@ public class HomeController {
     public String home() {
         log.debug("home()");
         
+        
+        
         return "home"; // view(JSP)의 경로를 리턴
     }
     
