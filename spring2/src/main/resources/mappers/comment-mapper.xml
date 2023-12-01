@@ -9,7 +9,7 @@
     <select id = "selectByPostId" resultType = "Comment">
         select * from COMMENTS where POSTID = #{postid} order by ID desc 
     </select>
- 
+
     <!-- 특정 포스트에 새 댓글을 추가. -->
     <insert id="insert">
         insert into COMMENTS (POSTID, WRITER, COMMENT_TEXT) values (#{postid}, #{writer}, #{comment_text}) 
@@ -31,8 +31,8 @@
     </update>
     
     <!-- 특정 포스트에 달려 있는 댓글 개수를 검색 -->
-    <select id="selectCommentCounts" resultType="java.lang.Long">
-        select count(ID) as "count" from COMMENTS where POSTID = #{postid}
+    <select id="selectCommentCounts" resultType="long">
+        select count(ID) as "count" from COMMENTS  where POSTID = #{postid}
     </select>
     
 </mapper>
