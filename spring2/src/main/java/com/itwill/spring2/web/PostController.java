@@ -64,12 +64,10 @@ public class PostController {
     }
     
     @GetMapping("/delete")
-    public String delete(@RequestParam(name="id") Long id, Model model) {
+    public String delete(@RequestParam(name="id") Long id) {
         log.debug("Get Delete(id = {})",id);
         
-        int post = postService.delete(id);
-        
-        model.addAttribute("id", post);
+        postService.delete(id);
         
         return "redirect:/post/list";
     }
@@ -91,7 +89,7 @@ public class PostController {
         
         model.addAttribute("postList", list);
 
-        return "/post/list";
+        return "post/list";
     }
     
     @PostMapping("/update")

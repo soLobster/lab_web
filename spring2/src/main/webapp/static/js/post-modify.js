@@ -27,11 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // 삭제 버튼의 클릭 이벤트 핸들러(리스너)를 등록
     btnDelete.addEventListener('click', () => {
         const result = confirm('정말 삭제할까요?');
+        // console.log(`confirm result = ${result}`); // -> true/false
         console.log(`confirm result = ${result}`);
 
-        if (result) {
-            location.href = `delete?id=${inputId.value}`;
-        }
+        if (result) { // result === ture: 사용자가 확인을 선택하면 
+            location.href = `delete?id=${inputId.value}`; // 상대경로(현재위치에서 delete를 실행) delete 요청을 보냄.
+        } // delete?id='아이디번호'
     });
 
     // 수정 완료 버튼의 클릭 이벤트 리스너를 등록
@@ -49,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (result) {
             form.action = 'update'; // 폼 양식을 제출(submit)할 주소. 기본 값은 현재 URL.
             form.method = 'post'; // 폼 요청 방식 get or post. 기본값은 'get'.
-            form.submit(); // 메서드.
+            form.submit(); // 폼 제출(서버로 요청 보냄)
         }
 
     });

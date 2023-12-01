@@ -31,22 +31,20 @@
     </delete>
     
     <select id="selectByCategory" resultType = "Post">
+        <bind name="searchKeyword" value="'%' + keyword + '%'"/>
        <choose>
-            <when test='value.equals("t")'>
-                SELECT * FROM POSTS WHERE UPPER(TITLE) LIKE '%' || UPPER(#{keyword}) || '%' ORDER BY ID DESC
+            <when test='value.equals("t")'> <!-- 문자열은 큰 따옴표로 묶어야한다... -->
+                SELECT * FROM POSTS WHERE UPPER(TITLE) LIKE UPPER(#{searchKeyword}) ORDER BY ID DESC
             </when>
             <when test='value.equals("c")'>
-                SELECT * FROM POSTS WHERE UPPER(CONTENT) LIKE '%' || UPPER(#{keyword}) || '%' ORDER BY ID DESC
+                SELECT * FROM POSTS WHERE UPPER(CONTENT) LIKE UPPER(#{searchKeyword}) ORDER BY ID DESC
             </when>
             <when test='value.equals("tc")'>
-                SELECT * FROM POSTS WHERE UPPER(TITLE) LIKE '%' || UPPER(#{keyword}) || '%' OR UPPER(CONTENT) LIKE '%' || UPPER(#{keyword}) || '%' ORDER BY ID DESC
+                SELECT * FROM POSTS WHERE UPPER(TITLE) LIKE UPPER(#{searchKeyword}) OR UPPER(CONTENT) LIKE UPPER(#{searchKeyword}) ORDER BY ID DESC
             </when>
             <when test='value.equals("a")'>
-                SELECT * FROM POSTS WHERE UPPER(AUTHOR) LIKE '%' || UPPER(#{keyword}) || '%' ORDER BY ID DESC
+                SELECT * FROM POSTS WHERE UPPER(AUTHOR) LIKE UPPER(#{searchKeyword}) ORDER BY ID DESC
             </when>
-            <otherwise>
-                <!-- handle other cases -->
-            </otherwise>
         </choose>
     </select> 
 </mapper>

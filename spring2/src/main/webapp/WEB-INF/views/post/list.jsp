@@ -17,28 +17,39 @@
 
 <body>
     <div class="container-fluid">
-    <!-- header -->
-    <c:set var="title" value="포스트 목록"/>
-    <%@ include file="../fragments/title.jspf" %>
-    
-    <!-- navigation -->
-    <%@ include file="../fragments/navigation.jspf" %>
-    
+        <!-- header -->
+        <c:set var="title" value="포스트 목록" />
+        <%@ include file="../fragments/title.jspf"%>
+
+        <!-- navigation -->
+        <%@ include file="../fragments/navigation.jspf"%>
+
         <main class="my-2">
-        <!-- post list table -->
+            <!-- post list table -->
             <div class="card">
-            <div class="card-header my-2">
-                    <c:url var = "searchPage" value ="/post/search"/>
-                    <form action = "${searchPage}" class="d-flex" role="search">
-                        <select class="form-select " aria-label="Small select example" name="category">
-                            <option selected>검색 주제 선택</option>
-                            <option value="t">제목</option>
-                            <option value="c">내용</option>
-                            <option value="tc">제목+내용</option>
-                            <option value="a">작성자</option>
-                        </select>
-                        <input class="form-control me-2" name="keyword" type="text" placeholder="Search" aria-label="Search" required autofocus/>
-                        <input class="btn btn-primary" value="Search" type="submit"/>
+                <div class="card-header">
+                    <c:url var="searchPage" value="/post/search" />
+                    <form action="${searchPage}" method ="get">
+                        <div class="row">
+                            <div class="col-3">
+                                <select class="form-select " name="category">
+                                    <option selected>검색 주제 선택</option>
+                                    <option value="t">제목</option>
+                                    <option value="c">내용</option>
+                                    <option value="tc">제목+내용</option>
+                                    <option value="a">작성자</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control me-2"
+                                    name="keyword" type="text"
+                                    placeholder="Search"  required autofocus />
+                            </div>
+                            <div class="col-3">
+                                <input class="form-control btn btn-primary"
+                                    value="Search" type="submit" />
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <table class="table table-striped table-hover card-body">
@@ -54,14 +65,15 @@
                         <c:forEach var="p" items="${postList}">
                             <tr>
                                 <td>${p.id}</td>
-                                <td>
-                                    <c:url var="postDetailsPage" value="/post/details" >
-                                        <c:param name="id" value="${p.id}"/>
-                                    </c:url>
-                                    <a href="${postDetailsPage}">${p.title}</a>
+                                <td><c:url var="postDetailsPage"
+                                        value="/post/details">
+                                        <c:param name="id"
+                                            value="${p.id}" />
+                                    </c:url> <a href="${postDetailsPage}">${p.title}</a>
                                 </td>
                                 <td>${p.author}</td>
-                                <td>${p.modifiedTime}</td> <!-- DTO의 필드 이름으로 해야한다. -->
+                                <td>${p.modifiedTime}</td>
+                                <!-- DTO의 필드 이름으로 해야한다. -->
                             </tr>
                         </c:forEach>
                     </tbody>
