@@ -10,9 +10,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import chap3.assembler.Assembler;
 import chap3.spring.ChangePasswordService;
 import chap3.spring.DuplicateMemberException;
+import chap3.spring.MemberInfoPrinter;
+import chap3.spring.MemberListPrinter;
 import chap3.spring.MemberNotFoundException;
 import chap3.spring.MemberRegisterService;
 import chap3.spring.RegisterRequest;
+import chap3.spring.VersionPrinter;
 import chap3.spring.WrongIdPasswordException;
 import config.AppCtx;
 
@@ -40,6 +43,15 @@ public class MainForSpring {
             } else if (command.startsWith("change ")) {
                 processChangeCommand(command.split(" "));
                 continue;
+            } else if (command.equals("list")) {
+                processListCommand();
+                continue;
+            } else if (command.startsWith("info ")) {
+                processInfoCommand(command.split(" "));
+                continue;
+            } else if (command.equals("version")) {
+                VersionPrinter versionPrinter = ctx.getBean("versionPrinter", VersionPrinter.class);
+                versionPrinter.print();
             }
             printHelp();
         }
@@ -95,6 +107,22 @@ public class MainForSpring {
         System.out.println("New Email name password Confirmed_Password");
         System.out.println("Change Email Current_Password New_Password");
         System.out.println();
+    }
+    
+    private static void processListCommand() {
+        MemberListPrinter listPrinter = 
+                ctx.getBean("listPrinter", MemberListPrinter.class);
+        listPrinter.printAll();
+    }
+ 
+    private static void processInfoCommand(String[] arg) {
+        if(arg.length != 2) {
+            printHelp();
+            return;
+        }
+        MemberInfoPrinter infoPrinter = ctx.getBean("infoPrinter" , MemberInfoPrinter.class);
+        
+        infoPrinter.printMemberInfo(arg[1]);
     }
     
 }
