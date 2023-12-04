@@ -68,16 +68,15 @@
                 </div>
             </div>
 
+
+            <!-- 댓글 보기 div 태그  -->
+            
             <div class="my-2 card">
                 <div class="card-header d-inline-flex gap-1">
                     <!-- collapse(접기/펼치기) 기능 버튼 -->
-                    <button class="btn btn-secondary" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseComments"
-                        aria-expanded="false"
-                        aria-controls="collapseComments">댓글 보기
-                    </button>
+                    <button class = "btn btn-secondary" id = "btnToggleComment">댓글 보기</button>
                 </div>
+                <!-- 댓글 토글 버튼에 의해서 접기/펼치기를 할 영역 -->
                 <div class="card-body collapse" id="collapseComments">
                     <div class="card card-body">
                         <!-- 내 댓글 등록 -->
@@ -108,31 +107,16 @@
 
 
     </div>
-    <script>
-                    $(document).ready(function() {
-                        $('#toggleButton').click(function() {
-                            if ($('#collapseComments').hasClass('show')) {
-                                $('#toggleButton').text('댓글 보기');
-                            } else {
-                                $('#toggleButton').text('댓글 가리기');
-                            }
-                        });
-                    });
-                </script>
     
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
+
+    <!-- 부트스트랩 모듈을 사용하는 자바스크립트 파일은 모듈을 포함시킨 다음에 작성 -->
+    <script src="../js/comment.js"></script>
 
 
-    
 </body>
 </html>
