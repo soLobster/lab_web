@@ -16,6 +16,7 @@ import com.itwill.spring2.dto.post.PostListItemDto;
 import com.itwill.spring2.dto.post.PostUpdateDto;
 import com.itwill.spring2.service.PostService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
