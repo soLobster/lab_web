@@ -121,7 +121,7 @@
                             <button type="button"
                                 class="btn btn-secondary"
                                 data-bs-dismiss="modal">취소</button>
-                            <button id="btnUpadateComment" type="button"
+                            <button id="btnUpdateComment" type="button"
                                 class="btn btn-primary">댓글 변경</button>
                         </div>
                     </div>
