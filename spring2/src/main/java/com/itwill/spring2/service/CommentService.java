@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.spring2.domain.Comment;
 import com.itwill.spring2.dto.comment.CommentListItemDto;
 import com.itwill.spring2.dto.comment.CommentRegisterDto;
+import com.itwill.spring2.dto.comment.CommentUpdateDto;
 import com.itwill.spring2.repository.CommentDao;
 
 import lombok.RequiredArgsConstructor;
@@ -45,6 +46,25 @@ public class CommentService {
         // COMMENTS 테이블에서 댓글 1개를 삭제한다.
         int result = commentDao.deleteById(id);
         log.debug("댓글 삭제 결과 = {}",result);
+        
+        return result;
+    }
+    
+    public CommentListItemDto readById(long id) {
+        log.debug("readById (id = {})", id);
+        
+        // 리포지토리 계층의 메서드를 호출해서 COMMENTS 테이블에서 아이디로 검색.
+        Comment comment = commentDao.selectById(id);
+        log.debug(comment.toString());
+        
+        
+        return CommentListItemDto.fromEntity(comment);
+    }
+    
+    public int updateById(CommentUpdateDto dto) {
+        log.debug("updateById (id = {})", dto);
+        
+        int result = commentDao.update(dto.toEntity());
         
         return result;
     }

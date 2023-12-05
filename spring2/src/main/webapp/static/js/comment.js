@@ -37,6 +37,64 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAddComment = document.querySelector('button#btnAddComment');
     // btnAddComment에 click eventListener 등록 -> 댓글 등록.
     btnAddComment.addEventListener('click', registerComment); // 함수 이름만 등록 (콜백 함수)
+    
+    // 부트스트랩 모달 객체 생성.
+    const modal = new bootstrap.Modal('div#commentModal', { backdrop: true });
+    
+    console.log(modal);
+    
+    // 모달의 [저장 내용 변경] 버튼(#btnUpdateComment)를 찾고, 클릭 이벤트 리스너를 등록
+    // 이벤트 리스너 함수 작성
+    // - Ajax put 요청을 보내서 댓글 업데이트
+    // - 업데이트 성공하면 모달을 닫는다.
+    // - 그러고 업데이트된 댓글 리스트를 다시 불러온다.
+  
+    // button#btnUpdateComment 요소를 찾음
+    // btnUpdateComment에 click eventListener 등록 
+    
+   const btnUpdateComment =  document.querySelector('button#btnUpadateComment');
+   console.log(btnUpdateComment); 
+    
+   btnUpdateComment.addEventListener('click', updateComment);    
+   
+    async function updateComment(e) {
+        const id = document.querySelector('input#modalCommentId').value;
+        const commentText = document.querySelector('textarea#modalCommentText').value;
+
+        console.log(id);
+        console.log(commentText);
+
+        if (commentText == '') {
+            alert('댓글을 입력하세요.');
+            return;
+        }
+
+        if (!confirm('수정한 내용을 저장할 까요?')) {
+            return;
+        }
+
+
+        await
+            axios
+                .put(`../api/comment/${id}`, { commentText })
+                .then((response) => {
+                    console.log(response);
+
+                    if (response.data === 1) {
+                        alert('댓글 수정 성공...!');
+
+                        modal.hide();
+
+                        getAllComments();
+                    }
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        
+    } // end updateComment
+    
     /*
     * 댓글 등록 버튼의 이벤트 리스너(콜백)
     */
@@ -164,7 +222,11 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', deleteComment);
         }
 
-        // TODO: 모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
+        //  모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
+        const btnModifies = document.querySelectorAll('button.btnCommentModify');
+        for (let btn of btnModifies){
+            btn.addEventListener('click', showCommentModal);
+        }
 
     }// end of makeCommentElements
 
@@ -198,4 +260,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }); // 에러를 처리하는 콜백 등록.
 
     } // end function deleteComment()
+    
+    /*
+        댓글[수정] 버튼의 클릭 이벤트 리스너 -> 댓글 수정 모달 보여주기.
+        async function: 비동기식으로 동작하는 함수를 await 키워드를 사용해서 
+        호출하는 코드가 있을 때.
+    */
+    
+    async function showCommentModal(e) { // btn.addEventListener('click', showCommentModal); => 콜백함수
+        // async가 달린 함수 안에서는 await가 꼭 같이 딸려와야한다.
+
+        // 이벤트 타겟(수정 버튼)에서 data-id 속성 값(댓글 아이디)를 읽음.
+        const id = e.target.getAttribute('data-id');
+        // Ajax 요청을 보내서 해당 아이디의 댓글을 검색
+        try {
+            const response = await axios.get(`../api/comment/${id}`);
+            console.log(response);
+
+            const commentId = response.data.id;
+            const commentText = response.data.commentText;
+            // 모달의 input과 textarea를 채움.
+            document.querySelector('input#modalCommentId').value = commentId;
+            document.querySelector('textarea#modalCommentText').value = commentText;
+            
+            modal.show(); // 생성된 모달 객체를 보여줌.
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    
+    
+    
+
 });

@@ -101,6 +101,34 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 댓글 업데이트 모달(다이얼로그) -->
+            <div id="commentModal" class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">댓글 수정</h5>
+                            <button type="button" class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input class="d-none" id = "modalCommentId"/>
+                            <textarea class="form-control" id="modalCommentText"></textarea>    
+                            <!-- 수정할 부분 -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">취소</button>
+                            <button id="btnUpadateComment" type="button"
+                                class="btn btn-primary">댓글 변경</button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end of modal -->
+            
+            
         </main>
 
 

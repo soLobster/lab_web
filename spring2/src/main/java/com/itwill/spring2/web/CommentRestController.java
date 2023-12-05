@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.spring2.domain.Comment;
 import com.itwill.spring2.dto.comment.CommentListItemDto;
 import com.itwill.spring2.dto.comment.CommentRegisterDto;
+import com.itwill.spring2.dto.comment.CommentUpdateDto;
 import com.itwill.spring2.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
@@ -76,6 +78,28 @@ public class CommentRestController {
         // 결과를 리턴(클라이언트로 응답을 보냄)
         return ResponseEntity.ok(result);
         
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<CommentListItemDto> getCommentById(@PathVariable long id){
+        log.debug("getCommentById(id={})",id);
+        
+        // Service Method Calls => response and Read Dto Object
+        CommentListItemDto dto = commentService.readById(id);
+        
+        // Return reseponse about Ajax Request 
+        return ResponseEntity.ok(dto);
+    }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Integer> updateCommentById(@PathVariable long id, @RequestBody CommentUpdateDto dto) {
+        log.debug("updateCommentById(id = {})", id);
+
+        dto.setId(id);
+
+        int result = commentService.updateById(dto);
+
+        return ResponseEntity.ok(result);
     }
         
     }
