@@ -3,6 +3,7 @@ package com.itwill.spring2.web;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,4 +65,17 @@ public class CommentRestController {
         // jackson-databind 라이브러리가 Java 객체를 JSON 문자열로 변환을 담당. (직렬화, Serialization).
         
     }
-}
+    
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Integer> deleteComment(@PathVariable long id){
+        log.debug("deleteComment(id={})",id);
+        
+        // 서비스 계층의 메서드를 호출해서 댓글 삭제 서비스를 수행.
+        int result = commentService.delete(id);
+        // 결과를 리턴(클라이언트로 응답을 보냄)
+        return ResponseEntity.ok(result);
+        
+    }
+        
+    }

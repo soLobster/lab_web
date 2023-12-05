@@ -38,6 +38,17 @@ public class CommentService {
         return list.stream().map(CommentListItemDto::fromEntity).toList();
     }
     
+    public int delete(long id) {
+        log.debug("delete(id={})",id);
+        
+        // repository 계층의 메서드를 호출한다. 
+        // COMMENTS 테이블에서 댓글 1개를 삭제한다.
+        int result = commentDao.deleteById(id);
+        log.debug("댓글 삭제 결과 = {}",result);
+        
+        return result;
+    }
+    
 }
 
 
