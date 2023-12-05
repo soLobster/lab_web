@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+
+
+
         if (!confirm('수정한 내용을 저장할 까요?')) {
             return;
         }
