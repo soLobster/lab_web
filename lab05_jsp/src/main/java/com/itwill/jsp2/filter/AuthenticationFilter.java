@@ -60,8 +60,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
         // -> URL >> http://localhost:8081/jsp2/post/details
         // log.debug("URI >> {}", ((HttpServletRequest) request).getRequestURI()); // ex
         // -> URI >> /jsp2/post/details
-        // log.debug("query String >> {}", ((HttpServletRequest)
-        // request).getQueryString()); // ex -> query String >> id=26
+        // log.debug("query String >> {}", ((HttpServletRequest) request).getQueryString()); // ex -> query String >> id=26
 
         String reqUrl = ((HttpServletRequest) request).getRequestURL().toString(); // 요청 주소(URL)
         String qs = ((HttpServletRequest) request).getQueryString(); // 질의 문자열 (Query String)

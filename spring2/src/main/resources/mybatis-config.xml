@@ -12,7 +12,7 @@
             alias="Post" />
         <typeAlias type="com.itwill.spring2.domain.Comment"
             alias="Comment" />
-        <typeAlias type="com.itwill.spring2.domain.User;"
+        <typeAlias type="com.itwill.spring2.domain.User"
             alias="User" />            
     </typeAliases>
 </configuration>

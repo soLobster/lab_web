@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.spring2.domain.User;
 import com.itwill.spring2.dto.user.UserRegisterDto;
+import com.itwill.spring2.dto.user.UserSignInDto;
 import com.itwill.spring2.repository.UserDao;
 
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,15 @@ public class UserService {
         return result;
     }// end create Method
     
+    
+    public User signIn(UserSignInDto dto) {
+        log.debug("UserSignInDto = {}", dto);
+        
+        User user = userDao.selectByUserIdAndPassword(dto);
+        
+        log.debug("SignIn user = {}",user);
+        
+        return user;
+    } // end signIn method
     
 }// end UserService
