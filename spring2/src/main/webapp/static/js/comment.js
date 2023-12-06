@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // button#btnUpdateComment 요소를 찾음
     // btnUpdateComment에 click eventListener 등록 
     
-   const btnUpdateComment =  document.querySelector('button#btnUpadateComment');
+   const btnUpdateComment =  document.querySelector('button#btnUpdateComment');
    console.log(btnUpdateComment); 
     
    btnUpdateComment.addEventListener('click', updateComment);    
