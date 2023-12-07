@@ -16,6 +16,8 @@
     <div class="container-fluid">
         <c:set var="title" value="회원가입" />
         <%@ include file="../fragments/title.jspf" %>
+         <!-- navigation -->
+        <%@ include file="../fragments/navigation.jspf"%>
         
         <main class="my-2">
             <div class="my-2 card card-body">

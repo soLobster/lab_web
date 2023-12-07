@@ -200,23 +200,31 @@ document.addEventListener('DOMContentLoaded', () => {
             //console.log(data[comment]);
             //comment 객체의 modifiedTime 값(Timestamp)을 날짜/시간 타입의 문자열로 변환.
             const time = new Date(comment.modifiedTime).toLocaleString();
+            
             htmlStr += `
             <div class = "card card-body my-2">
+                
                 <div>
                     <span class="d-none">${comment.id}</span>
                     <span class="fw-bold">${comment.writer}</span>
                     <span class="text-secondary">${time}</span>
                 </div>
+                
                 <div>${comment.commentText}</div>
-                <div>
-                    <button class="btnCommentDelete btn btn-outline-danger" 
-                    data-id="${comment.id}">삭제</button>
-                    <button class="btnCommentModify btn btn-outline-primary" 
-                    data-id="${comment.id}">수정</button>
-                </div>
-           </div>          
-          `;
-
+                `;
+                
+                // 댓글 작성자 아이디와 로그인 아이디가 같은 경우에만 [삭제/수정] 버튼을 보여줌.
+                if(comment.writer === signedInUser){
+                   htmlStr += `
+                       <div>
+                            <button class="btnCommentDelete btn btn-outline-danger" 
+                            data-id="${comment.id}">삭제</button>
+                            <button class="btnCommentModify btn btn-outline-primary" 
+                            data-id="${comment.id}">수정</button>
+                       </div>`;
+                }
+                
+            htmlStr += '</div>';          
         }
         divComments.innerHTML = htmlStr;
         // 모든 삭제 버튼을 찾아서 클릭 이벤트 리스너를 등록

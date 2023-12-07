@@ -57,33 +57,46 @@ public class UserController {
     }
     
     @PostMapping("/signin")
-    public String signin(HttpServletRequest request, @ModelAttribute UserSignInDto dto) throws UnsupportedEncodingException {
-        log.debug("POST signIn DTO = {}", dto);
-        
+    public String signin(@ModelAttribute UserSignInDto dto, HttpSession session, 
+            @RequestParam(name = "target" , defaultValue = "") String target) throws UnsupportedEncodingException {
+        log.debug("POST - signIn (dto = {}, session = {} , target = {})", dto, session, target);
+
         User user = userService.signIn(dto);
-        
-        String target = request.getParameter("target");
-        
-        
-        if(user != null) {
-            HttpSession session = request.getSession();
+
+        //String target = request.getParameter("target");
+
+        if (user != null) { // 아이디와 비밀번호 모두 일치하는 사용자가 있는 경우
             
-            session.setAttribute("user", user);
+            // 세션에 로그인 사용자 정보를 저장
+            session.setAttribute("signedInUser", user.getUserid());
             
-            log.debug("POST signIn Result User = {}", user);
+            log.debug("signin session = {}",session);
             
-            log.debug("target = {}",target);
-            
-            
-            return "redirect:/";
-            
-        } else {
-            return "/user/signin";
+            // 타겟 페이지로 이동
+            return (target.equals("")) ? "redirect:/" : "redirect:" + target;
+
+        } else { // 아이디와 비밀번호 모두 일치하는 사용자가 없는 경우
+            return "redirect:/user/signin?result=fail&target=" 
+                + URLEncoder.encode(target, "UTF-8");
         }
+    }
+    
+    @GetMapping("/signout")
+    public String signout(HttpSession session) {
+        // 세션에 저장된 "signedInUser" 정보를 삭제
+        log.debug("signout session = {}",session);
         
+        log.debug("signOut");
+        session.removeAttribute("signedInUser");
+        
+        // 세션을 만료 시킴
+        session.invalidate();
+        
+        return "redirect:/user/signin";
     }
     
     @GetMapping("/checkid")
+    @ResponseBody // Ajax 서비스를 구현하는 ResponseBody
     public ResponseEntity<String> CheckId(@RequestParam(name = "userid") String userid) {
         log.debug("User checkId userid= {}",userid);
         

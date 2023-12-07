@@ -35,8 +35,9 @@
                         <textarea class="form-control"  name="content" rows="5"
                             placeholder="내용을 작성하세요" required></textarea>
                     </div>
-                    <div class="my-2">
-                        <input class="form-control"  type="text" name="author" placeholder="작성자" required/>
+                    <div class="d-none">
+                        <!-- 작성자 아이디는 로그인한 사용자 아이디로 설정. -->
+                        <input class="form-control"  type="text" name="author"  value="${signedInUser}"/>
                     </div>
                     <div class="my-2">
                         <input class="form-control btn btn-success"  type="submit" value="포스팅"/>

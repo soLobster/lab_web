@@ -48,10 +48,12 @@
                             value="${post.author}" readonly />
                     </div>
                 </form>
-                <div class="card-footer">
-                    <button class="btn btn-danger" id="btnDelete">삭제</button>
-                    <button class="btn btn-success" id="btnUpdate">수정</button>
-                </div>
+                <c:if test="${post.author eq signedInUser}">
+                    <div class="card-footer">
+                        <button class="btn btn-danger" id="btnDelete">삭제</button>
+                        <button class="btn btn-success" id="btnUpdate">수정</button>
+                    </div>
+                </c:if>
             </div>
         </main>
         

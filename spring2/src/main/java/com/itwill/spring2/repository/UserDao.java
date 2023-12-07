@@ -10,4 +10,5 @@ public interface UserDao {
   int insert(User user);
   
   User selectByUserIdAndPassword(UserSignInDto dto);
+  
 }

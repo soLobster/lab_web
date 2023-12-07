@@ -60,12 +60,16 @@
                             value="${post.modified_time}" readonly />
                     </div>
                 </form>
-                <div class="card-footer">
-                    <c:url var="postModifyPage" value="/post/modify">
-                        <c:param name="id" value="${post.id}" />
-                    </c:url>
-                    <a href="${postModifyPage}" class="btn btn-warning">수정하기</a>
-                </div>
+                
+                <c:if test="${post.author eq signedInUser}">
+                    <div class="card-footer">    
+                        <!-- 작성자 아이디와 로그인 아이디가 일치할 경우에만 '수정하기' 버튼을 보여준다. -->
+                            <c:url var="postModifyPage" value="/post/modify">
+                                <c:param name="id" value="${post.id}" />
+                            </c:url>
+                            <a href="${postModifyPage}" class="btn btn-warning">수정하기</a>
+                    </div>
+                </c:if>
             </div>
 
 
@@ -86,9 +90,9 @@
                                 <textarea class="form-control"
                                     id="commentText"
                                     placeholder="댓글을 입력하세요"></textarea>
-                                <!-- 댓글 작성자 아이디 - TODO: 로그인 사용자 아이디로 변경 -->
+                                <!-- 댓글 작성자 아이디 - 로그인 사용자 아이디로 변경 value => el tags를 이용한다 -->
                                 <input class="d-none" id="writer"
-                                    value="admin" />
+                                    value="${signedInUser}" />
                             </div>
                             <div class="col-2">
                                 <button class="btn btn-outline-success"
@@ -142,6 +146,11 @@
 
     <!-- Axios 자바 스크립트 모듈 -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- 밑의 js/comments.js 에서 signedInUser 변수를 사용하기 위해서 여기서 상수를 선언한다 (JS) 왜냐면 JSP에서만 JAVA를 쓸 수 있지 JS에선 JAVA를 쓰지 못하기 때문  -->
+    <script>
+        const signedInUser = '${signedInUser}';
+    </script>
 
     <!-- 부트스트랩 모듈을 사용하는 자바스크립트 파일은 모듈을 포함시킨 다음에 작성 -->
     <script src="../js/comment.js"></script>

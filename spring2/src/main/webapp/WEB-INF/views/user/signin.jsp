@@ -17,23 +17,31 @@
 		<div class="container-fluid">
         <c:set var="title" value="로그인 페이지" />
         <%@ include file="../fragments/title.jspf" %>
+         <!-- navigation -->
+        <%@ include file="../fragments/navigation.jspf"%>
+        
         
         <main class="my-2">
             <div class="my-2 card card-body">
-            <c:url var="signInPage" value="/user/signin" />
-                <form action="${signInPage}" method="post">
-                   <div class="my-2">
-                        <input type="text" class="form-control"
-                            id="userid" name="userid" placeholder="아이디를 입력하세요." required autofocus />
-                    </div>
-                    <div class="my-2">
-                        <input type="password" class="form-control"
-                            id="password" name="password" placeholder="비밀번호를 입력하세요." required />
-                    </div>
-                    <div>
-                        <button type="submit" id="btnSignIn" 
-                            class="form-control btn btn-success">로그인</button>
-                    </div>
+                <form method="post"><!-- 폼에서 action 속성을 주지 않으면 현재 주소(page, URL)로 submit이 간다. -->
+                    <c:if test="${not empty param.result && param.result eq 'fail'}">
+                        <!-- 로그인 실패 후 다시 로그인 페이지로 이동했을 때 경고 메시지 -->
+                        <div class="text-danger">
+                            아이디와 패스워드를 확인하세요...
+                        </div>
+                    </c:if>
+                       <div class="my-2">
+                            <input type="text" class="form-control"
+                                id="userid" name="userid" placeholder="아이디를 입력하세요." required autofocus />
+                        </div>
+                        <div class="my-2">
+                            <input type="password" class="form-control"
+                                id="password" name="password" placeholder="비밀번호를 입력하세요." required />
+                        </div>
+                        <div>
+                            <button type="submit" id="btnSignIn" 
+                                class="form-control btn btn-success">로그인</button>
+                        </div>
                 </form>
             </div>
         </main>

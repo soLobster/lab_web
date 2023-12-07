@@ -38,13 +38,12 @@ public class UserService {
         return result;
     }// end create Method
     
-    
     public User signIn(UserSignInDto dto) {
-        log.debug("UserSignInDto = {}", dto);
+        log.debug("signIn (UserSignInDto = {})", dto);
         
         User user = userDao.selectByUserIdAndPassword(dto);
         
-        log.debug("SignIn user = {}",user);
+        log.debug("signIn user = {}", user);
         
         return user;
     } // end signIn method
