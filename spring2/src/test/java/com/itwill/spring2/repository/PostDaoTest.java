@@ -43,12 +43,13 @@ public class PostDaoTest {
         p = postDao.selectById(1_000); // 테이블에 존재하지 않는 아이디로 검색 했을 때
     }
     
-    //@Test
+    @Test
     public void insertTest() {
         Post post = Post.builder()
                 .title("INSERT_MyBatis_TEST")
                 .content("23.11.29 MyBatis Test")
                 .author("admin")
+                .original_file("/Users/ojng/lab_web/spring2/src/main/webapp/static/test.png")
                 .build();
         
         int result = postDao.insert(post);
@@ -69,7 +70,7 @@ public class PostDaoTest {
         
     }
     
-    @Test
+    //@Test
     public void deleteTest() {
         
         int result = postDao.delete(2L); // 아이디가 존재하는 경우 삭제 성공

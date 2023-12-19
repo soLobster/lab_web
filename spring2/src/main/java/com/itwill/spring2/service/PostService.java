@@ -48,12 +48,13 @@ public class PostService {
         log.debug("PostService - create(dto = {})", dto);
         
         // Repository 계층의 메서드를 호출해서 테이블에 데이터 insert.
+        
         int result = postDao.insert(dto.toEntity());
         
         log.debug("PostService - create(result = {})", result);
         
         return result;
-    }// end create(dto)
+    }// end create(dto, saved_file)
     
     public int update(PostUpdateDto dto) {
         log.debug("PostService - update(dto={})",dto);

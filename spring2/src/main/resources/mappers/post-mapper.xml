@@ -18,7 +18,7 @@
     
     <!-- POSTS 테이블에 새 포스트 insert (새글 작성) -->
     <insert id="insert">
-        insert into POSTS (TITLE, CONTENT, AUTHOR) values (#{title}, #{content}, #{author}) 
+        insert into POSTS (TITLE, CONTENT, AUTHOR, ORIGINAL_FILE, SAVED_FILE) values (#{title}, #{content}, #{author}, #{original_file}, #{saved_file}) 
         <!-- values안의 #{}은 대소문자를 구분한다. 따라서 domain의 필드와 같게 써야한다 -->
     </insert>
     
