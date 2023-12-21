@@ -1,9 +1,13 @@
 package com.itwill.spring2.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.spring2.domain.Post;
 import com.itwill.spring2.dto.post.PostCreateDto;
@@ -44,16 +48,37 @@ public class PostService {
                 .toList();
     }// end read() method
     
-    public int create(PostCreateDto dto) {
+    public void create(PostCreateDto dto, String sDirectory) throws IllegalStateException, IOException {
         log.debug("PostService - create(dto = {})", dto);
+        log.debug("PostService - create(sDirectory = {})", sDirectory);
         
         // Repository 계층의 메서드를 호출해서 테이블에 데이터 insert.
         
-        int result = postDao.insert(dto.toEntity());
+        MultipartFile file = dto.getOriginal_file();
         
-        log.debug("PostService - create(result = {})", result);
-        
-        return result;
+        if (!dto.getOriginal_file().isEmpty()) {
+
+            String originalFileName = file.getOriginalFilename();
+            log.debug("originalFileName = {}",originalFileName);
+            
+            // 확장자...
+            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            log.debug("fileExtension = {}",fileExtension);
+            
+            // 새로운 파일 이름...
+            String savedFileName = UUID.randomUUID().toString() + fileExtension;
+            
+            String absolutePath = sDirectory + File.separator + savedFileName;
+            log.debug("파일 절대 경로 = {}", absolutePath);
+            file.transferTo(new File(absolutePath));
+            
+            dto.setSaved_file(savedFileName);
+            
+            // 서비스 계층의 메서드를 호출해서 새 포스트 작성 서비스를 수행.
+            postDao.insert(dto.toEntity());
+            
+            log.debug("UPLOAD SUCCESS...!");
+        }
     }// end create(dto, saved_file)
     
     public int update(PostUpdateDto dto) {

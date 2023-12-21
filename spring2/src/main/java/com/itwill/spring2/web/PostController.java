@@ -109,7 +109,7 @@ public class PostController {
     
     
     @PostMapping("/create")
-    public String create(PostCreateDto dto) 
+    public String create(PostCreateDto dto, HttpServletRequest request) 
             throws IllegalStateException, IOException {
         log.debug("Post create(PostCreate title) = {}",dto.getTitle());
         log.debug("Post create(PostCreate content) = {}", dto.getContent());
@@ -117,34 +117,12 @@ public class PostController {
         log.debug("Post create(MultipartFile original_file = {})", dto.getOriginal_file().getOriginalFilename());
         
         
-        String UPLOAD_PATH = "/Users/ojng/lab_web/spring2/src/main/webapp/static/tmp/";
+        //String UPLOAD_PATH = "/Users/ojng/lab_web/spring2/src/main/webapp/static/tmp/";
         
+        String sDirectory = request.getServletContext().getRealPath("/static/tmp");
+        log.debug("sDirectory={}" ,sDirectory);
         
-        if (!dto.getOriginal_file().isEmpty()) {
-
-            String originalFileName = getFileName(dto.getOriginal_file());
-            String fileExtension = getFileExtension(originalFileName);
-            String fileName = UUID.randomUUID().toString() + fileExtension;
-
-            String filePath = UPLOAD_PATH + fileName;
-            log.debug("Post create(filePath = {})",filePath);
-            
-            String saved_file = fileName;
-            log.debug("Post create(saved_file = {})", saved_file);
-            
-            // 서비스 계층의 메서드를 호출해서 새 포스트 작성 서비스를 수행.
-            
-            dto.setSaved_file(saved_file);
-            
-            postService.create(dto);
-
-            File destFile = new File(filePath);
-
-            dto.getOriginal_file().transferTo(destFile);
-
-            log.debug("UPLOAD SUCCESS...!");
-
-        }
+        postService.create(dto, sDirectory);
         
         return "redirect:/post/list"; // list 로 이동(redirect)
     }
