@@ -14,6 +14,9 @@
 <body>
     <h1>첫번째 Spring Boot 프로젝트</h1>
     
+   <div th:insert = "~{fragments/header :: headerFragment('book Home')}"></div> 
+    
+    
     <h2 th:text="${currentTime}"></h2>
     
     <h3 th:text="${book}"></h3>

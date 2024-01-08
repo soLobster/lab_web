@@ -14,6 +14,7 @@
 <body>
     <h1>BOOKS LIST</h1>
 
+    <div th:insert = "~{fragments/header :: headerFragment('books list')}"></div> 
     
     <table class ="table card-body">
         <thead>
@@ -24,10 +25,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="book : ${books}"> 
-                <td th:text = "*{book.id}"></td>
-                <td th:text = "*{book.title}"></td>
-                <td th:text = "|*{book.author.firstName} *{book.author.lastName}|"></td>
+            <tr th:each="book : ${books}"  
+                th:object = "${book}"> 
+                <td th:text = "*{id}"></td>
+                <td th:text = "*{title}"></td>
+                <td th:text = "|*{author.firstName}*{author.lastName}|"></td>
             </tr>
         </tbody>
     </table>
