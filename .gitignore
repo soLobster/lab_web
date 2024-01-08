@@ -7,3 +7,8 @@
 */build
 */target
 */.DS_Store
+/bin
+/gradle
+gradlew
+gradlew.bat
+HELP.md

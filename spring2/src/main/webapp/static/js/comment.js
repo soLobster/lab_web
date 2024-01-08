@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function makeCommentElements(data) {
         // 댓글 목록 HTML을 추가할 영역.
         const divComments = document.querySelector('div#comments');
+        
 
         /*
          for (let c in data){
