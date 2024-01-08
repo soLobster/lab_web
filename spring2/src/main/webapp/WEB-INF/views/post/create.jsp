@@ -26,7 +26,7 @@
         <main class="my-2">
             <div class="my-2 p-2 card">
                 <c:url var="postCreatePage"  value ="/post/create"/>
-                <form class="card-body" action="${postCreatePage}" method="post">
+                <form class="card-body" action="${postCreatePage}" method="post" enctype="multipart/form-data">
                     <div class="my-2">
                         <input class="form-control"  type="text" name="title"
                             placeholder="제목을 입력하세요" required autofocus />
@@ -34,6 +34,10 @@
                     <div class="my-2">
                         <textarea class="form-control"  name="content" rows="5"
                             placeholder="내용을 작성하세요" required></textarea>
+                    </div>
+                    <div class="my-2">
+                    <!-- 파일 업로드를 위한 input -->
+                        <input class="form-control my-2" type="file" name="original_file" />
                     </div>
                     <div class="d-none">
                         <!-- 작성자 아이디는 로그인한 사용자 아이디로 설정. -->

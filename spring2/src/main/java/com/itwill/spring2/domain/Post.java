@@ -17,5 +17,7 @@ public class Post {
     private String author;
     private LocalDateTime created_time;
     private LocalDateTime modified_time;
-    
+    // 파일 첨부를 위한 도메인 추가
+    private String original_file;
+    private String saved_file;
 }

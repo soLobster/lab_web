@@ -151,11 +151,13 @@
         </dependency>
 
         <!-- An easy-to-use Spring bridge for MyBatis sql mapping framework. -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>3.0.3</version>
-        </dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+
+        
     </dependencies>
 
     <build>

@@ -17,6 +17,10 @@
             <c:url var="postCreatePage" value="/post/create"/>
             <a class="nav-link" href="${postCreatePage}">새 포스트</a>
         </li>
+        <li class="nav-item">
+            <c:url var="postUploadPage" value="/post/upload"/>
+            <a class="nav-link" href="${postUploadPage}">파일업로드</a>
+        </li>
         
         <c:if test="${empty signedInUser}">
             <li class="nav-item">

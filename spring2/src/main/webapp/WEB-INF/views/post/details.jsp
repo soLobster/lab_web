@@ -43,6 +43,10 @@
                             rows="5" cols="80" readonly>${post.content}</textarea>
                     </div>
                     <div class="my-2">
+                        <label for="content" class="form-label">이미지</label>
+                        <img class="form-control" id="upload_image" src="../tmp/${post.saved_file}" style="width:30%; height:30%;" />
+                    </div>
+                    <div class="my-2">
                         <label for="title" class="form-label">작성자</label>
                         <input class="form-control" id="author"
                             value="${post.author}" readonly />

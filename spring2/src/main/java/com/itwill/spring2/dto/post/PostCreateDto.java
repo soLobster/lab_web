@@ -1,6 +1,6 @@
 package com.itwill.spring2.dto.post;
 
-import java.time.LocalDateTime;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.spring2.domain.Post;
 
@@ -14,10 +14,13 @@ public class PostCreateDto {
     private String title;
     private String content;
     private String author;
-    
+    private MultipartFile original_file;
+    private String saved_file;
     // PostCreateDTO 객체를 Post 모델(엔티티) 객체로 변환해서 리턴하는 메서드.
+    
+    
     public Post toEntity() {
-        return Post.builder().title(title).content(content).author(author).build();
+        return Post.builder().title(title).content(content).original_file(original_file.getOriginalFilename()).saved_file(saved_file).author(author).build();
     }
     
 }

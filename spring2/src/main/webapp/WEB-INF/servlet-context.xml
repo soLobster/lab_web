@@ -40,5 +40,8 @@
     <context:component-scan
         base-package="com.itwill.spring2.web" />
 
+    <!-- mutipartResolver를 사용하기 위한 Beans 설정 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
+    
 
 </beans>
