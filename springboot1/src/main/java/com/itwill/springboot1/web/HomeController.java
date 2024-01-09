@@ -73,6 +73,9 @@ public class HomeController {
             Author author = Author.builder().firstName("first_").lastName("last" + i).build();
             books.add(Book.builder().id(i).title("Book_" + i).author(author).build()); 
         }
+        
+        books.get(0).setAuthor(null);
+        
         // 더미 데이터를 모델에 실어서 뷰에게 전달
         model.addAttribute("books", books);
         // 리턴 타입이 void인 경우 -> templates/books/list.html

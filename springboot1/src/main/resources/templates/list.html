@@ -14,7 +14,7 @@
 <body>
     <h1>BOOKS LIST</h1>
 
-    <div th:insert = "~{fragments/header :: headerFragment('books list')}"></div> 
+    <div th:insert = "~{/layout/fragments :: header('books list')}"></div> 
     
     <table class ="table card-body">
         <thead>
@@ -29,7 +29,8 @@
                 th:object = "${book}"> 
                 <td th:text = "*{id}"></td>
                 <td th:text = "*{title}"></td>
-                <td th:text = "|*{author.firstName}*{author.lastName}|"></td>
+                <!-- <td th:if ="*{author !=null}" th:text = "|*{author.firstName}*{author.lastName}|"></td> -->
+                <td th:text = "*{author != null} ? |*{author.firstName} *{author.lastName}| : 'no author' "></td>
             </tr>
         </tbody>
     </table>
