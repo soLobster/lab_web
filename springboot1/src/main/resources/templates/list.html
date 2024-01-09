@@ -12,9 +12,13 @@
 </head>
 
 <body>
+    <!-- templates/layout/fragments.html 에서 선언된 프래그먼트 끼워넣기 -->
+    <div th:replace = "~{/layout/fragments :: myHeader('Book List Page')}"></div>
+    <nav th:insert = "~{/layout/fragments :: navigation}"></nav>
+    
     <h1>BOOKS LIST</h1>
 
-    <div th:insert = "~{/layout/fragments :: header('books list')}"></div> 
+    <!--  <div th:insert = "~{/layout/fragments :: header('books list')}"></div>  -->
     
     <table class ="table card-body">
         <thead>
