@@ -16,12 +16,14 @@ import lombok.Data;
 public class Answer {
     
     @Id
-    @GeneratedValue(generator = "answer_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "answer_seq", allocationSize = 1)
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(generator = "answer_seq", strategy = GenerationType.SEQUENCE)
+    //@SequenceGenerator(name = "answer_seq", allocationSize = 1) -> sequence 증감 설정
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // pk
     
-    @ManyToOne
+    @ManyToOne // 다대일 관계
+    // 단 방향 연결
+    // 테이블의 컬럼 이름: question_[Question 엔터티의 ID 필드]
     private Question question; // fk
     
     @Basic(optional = false)

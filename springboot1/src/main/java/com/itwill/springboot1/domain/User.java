@@ -23,7 +23,8 @@ import lombok.Data;
 public class User extends BaseTimeEntity {
     
     @Id // Primary Key
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // MySql의 Autoincrement와 비슷한 기능. as identify 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    // MySql의 Autoincrement와 비슷한 기능. Oracle as identify 
     private Long id;
     
     @NaturalId // Unique 제약 조건을 준것
@@ -34,7 +35,6 @@ public class User extends BaseTimeEntity {
     // -> @Enumerated(EnumType.ordinal) 기본값. 기본값인 경우에는 생략 가능.
     // -> Ordinal: 숫지 타입 컬럼으로 매핑.
     // -> String: 문자열 타입 컬럼으로 매핑.
-    
     private Gender gender; 
     // int i = Gender.FEMALE.ordinal(); 
     // enum의 정의된 순서대로 숫자를 리턴한다.
