@@ -43,6 +43,17 @@ public class HomeController {
         return "employee/list"; // templates/employee/list.html
     }
     
+    @GetMapping("/employee/details/{id}")
+    public String empDetails(@PathVariable(name = "id") Integer id, Model model) {
+        log.info("empDetails(id = {})", id);
+        
+        Employee employee = empDao.findById(id).orElse(null);
+        
+        model.addAttribute("employee", employee);
+        
+        return "employee/details"; // templates/employee/details.html
+    }
+    
     @GetMapping("/department/list")
     public String dList(Model model) {
         log.info("dList()");
@@ -54,14 +65,14 @@ public class HomeController {
         return "department/list"; // templates/department/list.html
     }
     
-    @GetMapping("/employee/details/{id}")
-    public String employeeDetails(@PathVariable(name = "id") Integer id, Model model) {
-        log.info("employeeDetails(id = {})", id);
+    @GetMapping("/department/details/{id}")
+    public String deptDetails(@PathVariable(name = "id") Integer id, Model model) {
+        log.info("deptDetails");
         
-        Employee employee = empDao.findById(id).orElse(null);
+        Department department = deptDao.findById(id).orElse(null);
         
-        model.addAttribute("employee", employee);
+        model.addAttribute("department", department);
         
-        return "employee/details";
+        return "department/details";
     }
 }

@@ -14,34 +14,37 @@
 <body>
 <h1>EMPLOYEE LIST</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>EMPNO</th>
-                <th>ENAME</th>
-                <th>JOB</th>
-                <th>MANAGER_NO -> MANAGER_NAME</th>
-                <th>HIREDATE</th>
-                <th>SALARY</th>
-                <th>COMMISION</th>
-                <th>DEPT_NO -> DNAME</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each = "employee : ${employees}" th:object = "${employee}">
-                <td><a th:href ="@{/employee/details/} + *{id}" th:text = "*{id}"></a></td>
-                <td><a th:href ="@{/employee/details/} + *{id}" th:text = "*{ename}"></a></td>
-                <!-- <td th:text = "*{ename}"></td>  -->           
-                <td th:text = "*{job}"></td>            
-                <td th:text = "*{manager != null} ? *{manager.ename} : 'NO MANAGER'"></td>            
-                <td th:text = "*{hiredate}"></td>            
-                <td th:text = "*{salary}"></td>            
-                <td th:text = "*{commission != null} ? *{commission} : 'NO COMMISION' "></td>            
-                <td th:text = "*{department.dname}"></td> <!-- JOIN한 것 -->
-            </tr>
-        </tbody>
-    </table>
-
+<main>
+    <div class ="container-md">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>EMPNO</th>
+                    <th>ENAME</th>
+                    <th>JOB</th>
+                    <th>MANAGER_NO -> MANAGER_NAME</th>
+                    <th>HIREDATE</th>
+                    <th>SALARY</th>
+                    <th>COMMISION</th>
+                    <th>DEPT_NO -> DNAME</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each = "employee : ${employees}" th:object = "${employee}">
+                    <td><a th:href ="@{/employee/details/} + *{id}" th:text = "*{id}"></a></td>
+                    <td><a th:href ="@{/employee/details/} + *{id}" th:text = "*{ename}"></a></td>
+                    <!-- <td th:text = "*{ename}"></td>  -->           
+                    <td th:text = "*{job}"></td>            
+                    <td th:text = "*{manager != null} ? *{manager.ename} : 'NO MANAGER'"></td>            
+                    <td th:text = "*{hiredate}"></td>            
+                    <td th:text = "*{salary}"></td>            
+                    <td th:text = "*{commission != null} ? *{commission} : 'NO COMMISION' "></td>            
+                    <td th:text = "*{department.dname}"></td> <!-- JOIN한 것 -->
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+</main>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
