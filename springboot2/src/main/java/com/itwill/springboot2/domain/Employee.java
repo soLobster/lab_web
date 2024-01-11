@@ -27,7 +27,7 @@ public class Employee {
     
     //@Column(name = "MGR")
     //private Integer manager;
-    @ToString.Exclude // toString 메서드에서 제외.
+    @ToString.Exclude // toString 메서드에서 제외. 롬복과 관련되어 있음
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MGR", referencedColumnName = "EMPNO")
     private Employee manager;

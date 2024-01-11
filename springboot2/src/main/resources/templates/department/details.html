@@ -29,7 +29,7 @@
         </tr>
     </table>
     
-    <!-- TODO: ${department.employees}가 null이 아닐때만 테이블을 보여주고 싶고 null 이라면 "해당 직원이 없음을 알려주고 싶음"-->
+    <!-- ${department.employees}가 null이 아닐때만 테이블을 보여주고 싶고 null 이라면 "해당 직원이 없음"을 알려주고 싶음 -->
     
     <table class ="table" th:if = "${department.employees != null and !#lists.isEmpty(department.employees)}">
         <thead>
@@ -46,13 +46,13 @@
         
         <tbody>
             <tr th:each = "employee : ${department.employees}">
-                <td><a th:href ="@{/employee/details/} + ${employee.id}" th:text = "*{employee.id}"></a></td>
-                <td><a th:href ="@{/employee/details/} + ${employee.id}" th:text = "*{employee.ename}"></a></td>
+                <td><a th:href ="@{/employee/details/} + ${employee.id}" th:text = "${employee.id}"></a></td>
+                <td><a th:href ="@{/employee/details/} + ${employee.id}" th:text = "${employee.ename}"></a></td>
                 <td th:text = "${employee.job}"></td>            
-                <td th:text = "${employee.manager != null} ? *{employee.manager.ename} : 'NO MANAGER'"></td>            
+                <td th:text = "${employee.manager != null} ? ${employee.manager.ename} : 'NO MANAGER'"></td>            
                 <td th:text = "${employee.hiredate}"></td>            
                 <td th:text = "${employee.salary}"></td>            
-                <td th:text = "${employee.commission != null} ? *{employee.commission} : 'NO COMMISION' "></td>            
+                <td th:text = "${employee.commission != null} ? ${employee.commission} : 'NO COMMISION' "></td>            
             </tr>
         </tbody>                
     </table>

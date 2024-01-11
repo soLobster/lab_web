@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPRINGBOOT3</title>
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous">
+</head>
+
+<body>
+ <header class="bg-primary text-white">
+    <h1 class="display-2 text-center">EMPLOYEE DETAILS</h1>
+ </header>
+ 
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+           <div class = "navbar-nav">
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <li class = "nav-item"><a class="nav-link fs-3" th:href = "@{/}">홈</a></li>
+               <li class = "nav-item"><a class="nav-link fs-3" th:href = "@{/employee/list}">직원</a></li>
+               <li class = "nav-item"><a class="nav-link fs-3" th:href = "@{/department/list}">부서</a></li>
+               </ul>  
+           </div>
+       </div>    
+    </nav>
+ 
+ <main>
+    <div class = "container bg-body-secondary ">
+        <div class="row justify-content-md-center">
+            <div class="col-md">
+                <label class = "form-label fs-5 my-2">이름</label>
+                <div class = "form-control fs-5" th:text = "${employee.first_name} + ' ' + ${employee.last_name}"></div>
+                <label class = "form-label fs-5 my-2">사원 번호</label>
+                <div class = "form-control fs-5" th:text = "${employee.id}"></div>
+                <label class = "form-label fs-5 my-2">이메일</label>
+                <div class = "form-control fs-5" th:text = "${employee.email} + '@itwill.com'"></div>
+                <label class = "form-label fs-5 my-2">연락처</label>
+                <div class = "form-control fs-5" th:text = "${employee.phone_number}"></div>
+                <label class = "form-label fs-5 my-2">고용 날짜</label>
+                <div class = "form-control fs-5" th:text = "${employee.hire_date}"></div>
+                <label class = "form-label fs-5 my-2">직무</label>
+                <div class = "form-control fs-5" th:text = "${employee.job.title}"></div>
+                <label class = "form-label fs-5 my-2">급여</label>
+                <div class = "form-control fs-5" th:text = "'$' + ${employee.salary}"></div>
+                <label class = "form-label fs-5 my-2">커미션</label>
+                <div class = "form-control fs-5" th:text = "${employee.commission_pct != null} ? ${employee.commission_pct} : 'NO COMMISSION FEE'"></div>
+                <label class = "form-label fs-5 my-2">매니저</label>
+                <div class = "form-control fs-5" th:text = "${employee.manager != null} ? ${employee.manager.first_name} + ' '+ ${employee.manager.last_name} : 'NO MANAGER'"></div>
+                <label class = "form-label fs-5 my-2">부서</label>
+                <div class = "form-control fs-5 mb-3" th:text = "${employee.dept != null} ? ${employee.dept.name} : 'NO DEPARTMENT'"></div>
+            </div>    
+        </div>
+    </div>
+ </main>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>

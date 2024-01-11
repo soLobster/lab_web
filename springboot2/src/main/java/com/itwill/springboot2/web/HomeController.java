@@ -73,6 +73,6 @@ public class HomeController {
         
         model.addAttribute("department", department);
         
-        return "department/details";
+        return "department/details"; // templates/department/details.html
     }
 }
