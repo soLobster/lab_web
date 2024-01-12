@@ -62,10 +62,10 @@
                         <tbody class="table-group-divider">
                             <tr th:each = "employee : ${department.employees}" th:object = "${employee}">
                                 <td><a th:href="@{/employee/details/} + *{id}" th:text = "*{id}"></a></td> 
-                                <td><a th:href="@{/employee/details/} + *{id}" th:text = "*{first_name} +' '+ *{last_name}"></a></td> 
+                                <td><a th:href="@{/employee/details/} + *{id}" th:text = "*{firstName} +' '+ *{lastName}"></a></td> 
                                 <td th:text = "*{email} + '@itwill.com'"></td> 
                                 <td th:text = "*{phone_number}"></td> 
-                                <td th:text = "*{hire_date}"></td> 
+                                <td th:text = "*{hireDate}"></td> 
                                 <td th:text = "*{job.title}"></td> 
                                 <td th:text = "*{salary}"></td> 
                                 <td th:text = "*{commission_pct != null} ? *{commission_pct} : 'X'"></td> 

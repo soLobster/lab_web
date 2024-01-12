@@ -44,7 +44,7 @@
                     <tr th:each = "employee : ${employees}" th:object = "${employee}">
                         <td><a th:href="@{/employee/details/} + *{id}" th:text = "*{id}"></a></td>
                         <!-- <td><a th:href="@{/employee/details(id=${employee.id})}" th:text = "*{id}"></a></td> -->
-                        <td><a th:href="@{/employee/details/} + *{id}" th:text = "*{first_name} +' '+ *{last_name}"></a></td> 
+                        <td><a th:href="@{/employee/details/} + *{id}" th:text = "*{firstName} +' '+ *{lastName}"></a></td> 
                         <td th:text = "*{email} + '@itwill.com'"></td> 
                         <td th:text = "*{phone_number}"></td>
                         <!-- <td><a th:href = "@{/department/details/} + *{dept.id}" th:text = "*{dept !=null} ? *{dept.name} : 'X'"></a></td>  -->

@@ -2,9 +2,13 @@ package com.itwill.springboot3.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -25,6 +29,8 @@ public class Location {
     @Column(name = "STATE_PROVINCE")
     private String state;
     
-    @Column(name = "COUNTRY_ID")
-    private String country;
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "COUNTRY_ID")
+    private Country country;
 }

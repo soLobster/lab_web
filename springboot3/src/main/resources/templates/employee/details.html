@@ -33,7 +33,7 @@
         <div class="row justify-content-md-center">
             <div class="col-md">
                 <label class = "form-label fs-5 my-2">이름</label>
-                <div class = "form-control fs-5" th:text = "${employee.first_name} + ' ' + ${employee.last_name}"></div>
+                <div class = "form-control fs-5" th:text = "${employee.firstName} + ' ' + ${employee.lastName}"></div>
                 <label class = "form-label fs-5 my-2">사원 번호</label>
                 <div class = "form-control fs-5" th:text = "${employee.id}"></div>
                 <label class = "form-label fs-5 my-2">이메일</label>
@@ -41,7 +41,7 @@
                 <label class = "form-label fs-5 my-2">연락처</label>
                 <div class = "form-control fs-5" th:text = "${employee.phone_number}"></div>
                 <label class = "form-label fs-5 my-2">고용 날짜</label>
-                <div class = "form-control fs-5" th:text = "${employee.hire_date}"></div>
+                <div class = "form-control fs-5" th:text = "${employee.hireDate}"></div>
                 <label class = "form-label fs-5 my-2">직무</label>
                 <div class = "form-control fs-5" th:text = "${employee.job.title}"></div>
                 <label class = "form-label fs-5 my-2">급여</label>

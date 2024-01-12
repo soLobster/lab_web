@@ -2,7 +2,9 @@ package com.itwill.springboot3.domain;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -21,15 +23,22 @@ public class Employee {
     @Column(name = "EMPLOYEE_ID")
     private Integer id;
     
-    private String first_name;
+    //@Embedded
+    //private EmployeeName name;
     
-    private String last_name;
+    @Column(name = "first_name")
+    private String firstName;
     
+    @Column(name = "last_name")
+    private String lastName;
+    
+    @Basic(optional = false)    
     private String email;
     
     private String phone_number;
     
-    private LocalDate hire_date;
+    @Column(name = "hire_date")
+    private LocalDate hireDate;
     
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,7 +54,8 @@ public class Employee {
     @JoinColumn(name = "manager_id" , referencedColumnName = "EMPLOYEE_ID")
     private Employee manager;
     
-    @ManyToOne // DEPARTMENT 테이블을 참조한다
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY) // DEPARTMENT 테이블을 참조한다
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department dept;
 }
