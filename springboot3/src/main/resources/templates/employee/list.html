@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPRINGBOOT3</title>
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous">
+</head>
+
+<body>
+    <header class="bg-primary text-white">
+    <h1 class="display-2 text-center">EMPLOYEE LIST</h1>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+           <div class = "navbar-nav">
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0">               
+               <li class = "nav-item"><a class="nav-link fs-3" th:href = "@{/}">홈</a></li>
+               <li class = "nav-item"><a class="nav-link fs-3" th:href = "@{/employee/list}">직원</a></li>
+               <li class = "nav-item"><a class="nav-link fs-3" th:href = "@{/department/list}">부서</a></li>
+               </ul>  
+           </div>
+       </div>    
+    </nav>
+    
+    <main>
+        <div class ="container-lg">
+            <table class ="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>사번</th>
+                        <th>이름</th>
+                        <th>이메일</th>
+                        <th>연락처</th>
+                        <th>부서</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr th:each = "employee : ${employees}" th:object = "${employee}">
+                        <td><a th:href="@{/employee/details/} + *{id}" th:text = "*{id}"></a></td>
+                        <!-- <td><a th:href="@{/employee/details(id=${employee.id})}" th:text = "*{id}"></a></td> -->
+                        <td><a th:href="@{/employee/details/} + *{id}" th:text = "*{firstName} +' '+ *{lastName}"></a></td> 
+                        <td th:text = "*{email} + '@itwill.com'"></td> 
+                        <td th:text = "*{phone_number}"></td>
+                        <!-- <td><a th:href = "@{/department/details/} + *{dept.id}" th:text = "*{dept !=null} ? *{dept.name} : 'X'"></a></td>  -->
+                        <td>
+                            <td:block th:if="*{dept != null}">
+                                <a th:href="@{/department/details/} + *{dept.id}" th:text="*{dept.name}"></a>
+                            </td:block>
+                            
+                            <td:block th:if="*{dept == null}">
+                                <a th:text = "X"></a>
+                            </td:block>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- 페이지 네이션 -->
+            <nav aria-label="Page navigation example">
+            <!-- (1) <ul> 쪽에서 페이지 숫자를 계산하고, 각 link 를 통해 페이지의 유저가 클릭한 페이지 숫자를 담아 컨트롤러로 보낸다. -->
+            <!-- th:with = 변수 선언과 같은 느낌 부모 태그에 지정하면 자식들은 전부 사용 할 수 있다.  -->
+                <ul class="pagination justify-content-center" 
+                    th:with="start=${(employees.number div 10) * 10 + 1}, 
+                             last=${start + 9 < employees.totalPages ? start + 9 : employees.totalPages}">
+                    
+            <!-- (2) 첫 번째 페이지로 가는 링크이다. page 값에 1을 부여한다. -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/employee/list(page=1)}" aria-label="First">
+                            <span aria-hidden="true">FIRST</span>
+                        </a>
+                    </li>
+                    
+            <!-- (3) 이전 페이지로 가는 링크이다. first 가 true 이면 # 를 통해 이동 못하게 막고, 아니라면 employees.number 로 이동하도록 한다. -->                    
+                    <li class="page-item" th:class="${employees.first} ? 'disabled'">
+                        <a class="page-link" th:href="${employees.first} ? '#' : @{/employee/list(page=${employees.number})}" aria-label="previous">
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+                    
+            <!-- (4) 숫자를 직접 클릭해서 갈 수 있는 링크이다. ul 에서 계산한 start 부터 last 까지 반복해서 출력 후 각 숫자를 누르면 해당 숫자의 페이지로 이동하도록 한다. -->        
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == employees.number + 1 ? 'active' : ''}">
+                        <a class="page-link" th:text="${page}" th:href="@{/employee/list(page=${page})}">&nbsp;</a>
+                    </li>
+            
+            <!-- (5) 다음 페이지로 가는 링크이다. last 가 true 이면 # 를 통해 이동 못하게 막고, 아니라면 employees.number 로 이동하도록 한다. -->        
+                    <li class="page-item" th:class="${employees.last} ? 'disabled'">
+                        <a class="page-link" th:href="${employees.last} ? '#' : @{/employee/list(page=${employees.number +2})}" aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+                    
+            <!-- (6) 마지막 페이지로 가는 링크이다. page 값에 totalPages 값을 부여한다. -->        
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/employee/list(page=${employees.totalPages})}" aria-label="Last">
+                            <span aria-hidden="true">LAST</span>
+                        </a> 
+                    </li>
+                </ul>
+            </nav>
+            <!-- 페이지 네이션 끝 -->
+        </div>
+    </main>
+    
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>
