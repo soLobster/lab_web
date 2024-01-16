@@ -21,7 +21,7 @@
                 <label class = "form-label fs-5 my-2">작성자</label>
                 <div class = "form-control fs-5 mb-3" th:text = "${post.author}"></div>
                 <div class="d-grid d-md-flex justify-content-md-end mb-3">
-                  <a th:href="@{/post/update/} +${post.id}" class="btn btn-primary me-md-2">수정</a>
+                  <a th:href="@{/post/update/{post.id}(post.id=${post.id})}" class="btn btn-primary me-md-2">수정</a>
                 </div>
             </div>    
         </div>

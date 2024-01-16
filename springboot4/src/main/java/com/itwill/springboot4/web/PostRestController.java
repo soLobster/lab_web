@@ -43,8 +43,7 @@ public class PostRestController {
         }
         
         return entity;
-    }
-    
+    }   
     
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") long id){

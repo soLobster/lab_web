@@ -57,20 +57,20 @@
                         <li class="page-item"
                             th:classappend="${!page.hasPrevious} ? 'disabled'">
                             <a class="page-link"
-                                th:href="@{/post/list(p=${page.number - 1})}">&lt;</a>
+                                th:href="@{/post/search(category=${param.category}, keyword=${param.keyword}, page=${page.number - 1})}">&lt;</a>
                         </li>
+                        <!-- http://localhost:8081/post/search?category=t&keyword=test -->
                         <li class="page-item"
                             th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1)}"
                             th:if="${pageNo > page.number - 5 && pageNo <= page.number + 5}"
                             th:classappend="${pageNo == page.number} ? 'active'">
                             <a class="page-link"
-                                th:href="@{/post/list(p=${pageNo})}"
-                                th:text="${pageNo + 1}"></a>
+                                th:href="@{/post/search(category=${param.category}, keyword=${param.keyword}, page=${pageNo})}" th:text="${pageNo + 1}"></a>
                         </li>
                         <li class="page-item"
                             th:classappend="${!page.hasNext} ? 'disabled'">
                             <a class="page-link"
-                                th:href="@{/post/list(p=${page.number + 1})}">&gt;</a>
+                                th:href="@{/post/search(category=${param.category}, keyword=${param.keyword}, page=${page.number + 1})}">&gt;</a>
                         </li>
                     </ul>
         </div>

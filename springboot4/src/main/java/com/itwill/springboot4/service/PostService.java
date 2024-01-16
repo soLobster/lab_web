@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.itwill.springboot4.domain.Post;
 import com.itwill.springboot4.domain.PostRepository;
 import com.itwill.springboot4.dto.PostDto;
+import com.itwill.springboot4.dto.PostSearchRequestDto;
 
+import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +60,7 @@ public class PostService {
         postDao.deleteById(id);
     }
     
+    @Transactional 
     public void updatePost(long id, PostDto dto) {
         log.info("===================");
         log.info("updatePost() id = {}" , id);
@@ -70,8 +73,10 @@ public class PostService {
         entity.update(dto.getTitle(), dto.getContent());
         log.info(">> UPDATE ENTITY = {}", entity);
         
-        postDao.save(entity);
-        log.info(">> SAVE ENTITY = {}", entity);
+        // transactional 애너테이션의 존재 업데이트가 실행되면 내용이 자동으로 저장됨.
+        
+//        postDao.save(entity);
+//        log.info(">> SAVE ENTITY = {}", entity);
     }
     
     public void createPost(PostDto dto) {
@@ -89,5 +94,32 @@ public class PostService {
         postDao.save(post);
         
         log.info("save post = {}", post);
+    }
+    
+    public Page<Post> searchPostList(PostSearchRequestDto dto) {
+        
+        Pageable pageable = PageRequest.of(dto.getPage(), 10, Sort.by("id").descending());
+        
+        Page<Post> searchPostList;
+        
+        if(dto.getCategory() != null) {
+            if(dto.getCategory().equals("t")) {
+               log.info("CATEGORY = {}", dto.getCategory());
+               searchPostList = postDao.findByTitleContainingIgnoreCase(dto.getKeyword(), pageable);
+            } else if (dto.getCategory().equals("c")) {
+               log.info("CATEGORY = {}", dto.getCategory());
+                searchPostList = postDao.findByContentContainingIgnoreCase(dto.getKeyword(), pageable);
+            } else if (dto.getCategory().equals("tc")) {
+               log.info("CATEGORY = {}", dto.getCategory());
+                searchPostList = postDao.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(dto.getKeyword(), pageable);
+            } else {
+                log.info("CATEGORY = {}", dto.getCategory());
+                searchPostList = postDao.findByAuthorContainingIgnoreCase(dto.getKeyword(), pageable);
+            }
+        } else {
+            searchPostList = null;
+        }
+        
+        return searchPostList;
     }
 }
