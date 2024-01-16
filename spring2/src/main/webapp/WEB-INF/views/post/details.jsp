@@ -91,9 +91,7 @@
                         <div class="row my-2">
                             <div class="col-10">
                                 <!-- 댓글 입력 창 -->
-                                <textarea class="form-control"
-                                    id="commentText"
-                                    placeholder="댓글을 입력하세요"></textarea>
+                                <textarea class="form-control" id="commentText" placeholder="댓글을 입력하세요"></textarea>
                                 <!-- 댓글 작성자 아이디 - 로그인 사용자 아이디로 변경 value => el tags를 이용한다 -->
                                 <input class="d-none" id="writer"
                                     value="${signedInUser}" />
