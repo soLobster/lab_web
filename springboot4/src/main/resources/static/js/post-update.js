@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
             axios.put(`/api/post/update/${id}`, data)
             .then((response) => {
                 console.log(response);
-                if(response.data === 1){
+                if(response.status === 200){
                     alert('POST 수정 완료...!');
-                    window.location.href = '/post/list';
+                    window.location.href = response.headers.location;
                 }
             }).catch((error) => {
                 console.log(error);
@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
             axios.delete(`/api/post/delete/${id}`)
             .then((response) => {
                 console.log(response);
-                if(response.data === 1){
+                if(response.status === 200){
                     alert('POST 삭제 완료....!');
-                    window.location.href = '/post/list';
+                    window.location.href = response.headers.location;
                 }
             }).catch((error) => {
                 console.log(error);

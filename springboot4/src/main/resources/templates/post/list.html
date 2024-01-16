@@ -19,8 +19,8 @@
                 </tr>
             </thead>       
             <tbody class="table-group-divider">
-                <tr th:each = "post : ${postList}" th:object = "${post}">
-                    <td><a th:href = "@{/post/details/} + *{id}" th:text = "*{id}"></a></td>
+                <tr th:each = "post : ${page}" th:object = "${post}">
+                    <td><a th:href = "@{/post/details/{id}(id=*{id})}" th:text = "*{id}"></a></td>
                     <td><a th:href = "@{/post/details/} + *{id}" th:text = "*{title}"></a></td>
                     <td th:text = "*{author}"></td>
                     <td th:text = "*{changeDateType(createdTime)}"></td>                
@@ -29,6 +29,28 @@
         </table>
         <div class="d-grid d-md-flex justify-content-md-end mb-3">
                   <a th:href = "@{/post/create}" class="btn btn-success me-md-2" id="btnUpdate" role="button" >글 작성</a>
+        </div>
+        <div>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"
+                            th:classappend="${!page.hasPrevious} ? 'disabled'">
+                            <a class="page-link"
+                                th:href="@{/post/list(p=${page.number - 1})}">&lt;</a>
+                        </li>
+                        <li class="page-item"
+                            th:each="pageNo : ${#numbers.sequence(0, page.totalPages - 1)}"
+                            th:if="${pageNo > page.number - 5 && pageNo <= page.number + 5}"
+                            th:classappend="${pageNo == page.number} ? 'active'">
+                            <a class="page-link"
+                                th:href="@{/post/list(p=${pageNo})}"
+                                th:text="${pageNo + 1}"></a>
+                        </li>
+                        <li class="page-item"
+                            th:classappend="${!page.hasNext} ? 'disabled'">
+                            <a class="page-link"
+                                th:href="@{/post/list(p=${page.number + 1})}">&gt;</a>
+                        </li>
+                    </ul>
         </div>
     </div>
 </main>

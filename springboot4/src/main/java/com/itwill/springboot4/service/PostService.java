@@ -2,6 +2,9 @@ package com.itwill.springboot4.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +24,25 @@ public class PostService {
     private final PostRepository postDao;
     
     // 전체 포스트 목록을 가져옴.
-    public List<Post> getPostList(){
-        log.info("====================");
-        log.info("getPostList()");
-        log.info("====================");
+//    public List<Post> getPostList(){
+//        log.info("====================");
+//        log.info("getPostList()");
+//        log.info("====================");
+//        
+//        return postDao.findAll(Sort.by(Sort.Direction.DESC, "id"));
+//    }
+    
+    public Page<Post> getPostList(int page){
+        log.info("getPostList(page = {})", page);
         
-        return postDao.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("id").descending());
+        Page<Post> data = postDao.findAll(pageable);
+        
+        return data;
     }
     
     // 포스트 상세 페이지를 띄우기 위한 하나의 POST를 가져옴
-    public Post getPostDetails(Long id) {
+    public Post getPostDetails(long id) {
         log.info("===================");
         log.info("getPostDetails()");
         log.info("===================");
@@ -38,7 +50,7 @@ public class PostService {
         return postDao.findById(id).orElseThrow();
     }
     
-    public void deletePost(Long id) {
+    public void deletePost(long id) {
         log.info("===================");
         log.info("deletePost(id = {})", id);
         log.info("===================");
@@ -46,7 +58,7 @@ public class PostService {
         postDao.deleteById(id);
     }
     
-    public void updatePost(Long id, PostDto dto) {
+    public void updatePost(long id, PostDto dto) {
         log.info("===================");
         log.info("updatePost() id = {}" , id);
         log.info("updatePost() dto = {}" , dto);        

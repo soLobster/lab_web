@@ -2,6 +2,7 @@ package com.itwill.springboot4.web;
 
 import java.net.URI;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.springboot4.dto.PostDto;
@@ -32,10 +32,12 @@ public class PostRestController {
         log.info("createPost() = {}", dto);
         
         ResponseEntity<?> entity = null;
+        HttpHeaders headers = new HttpHeaders();
         
         try {
             postService.createPost(dto);
-            entity = ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/post/list")).build();
+            headers.setLocation(URI.create("/post/list"));
+            entity = new ResponseEntity<>(headers, HttpStatus.OK);
         } catch (Exception e) {
             entity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -49,10 +51,12 @@ public class PostRestController {
         log.info("deletePost() = {}", id);
         
         ResponseEntity<?> entity = null;
+        HttpHeaders headers = new HttpHeaders();
         
         try {
             postService.deletePost(id);
-            entity = ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/post/list")).build();
+            headers.setLocation(URI.create("/post/list"));
+            entity = new ResponseEntity<>(headers, HttpStatus.OK);
         } catch (Exception e) {
             entity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -62,15 +66,16 @@ public class PostRestController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") Long id, @RequestBody PostDto dto) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody PostDto dto) {
         log.info("updatePost() = {} ", id);
         log.info("POSTUPDATEDTO = {}", dto);
         
         ResponseEntity<?> entity = null;
-        
+        HttpHeaders headers = new HttpHeaders();
         try {
             postService.updatePost(id, dto);
-            entity = new ResponseEntity<>(HttpStatus.OK);
+            headers.setLocation(URI.create("/post/details/"+id));
+            entity = new ResponseEntity<>(headers, HttpStatus.OK);
         } catch (Exception e) {
             entity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
