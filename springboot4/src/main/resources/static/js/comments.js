@@ -113,10 +113,6 @@
                     data-id="${comment.id}">수정</button>
                  </div>
                  <div class="collapse" id="collapseExample">
-                 <!-- TODO: btnModifies에서 각각의 btn를 클릭 했을 때 각각의 btn이 '수정'에서 '수정 확정'으로 변하고 
-                 여기에 <textarea> 태그를 추가 하고 싶음  그 다음에 변경된 '수정 확정' 버튼을 눌렀을때 다시 '수정' 으로 변하고
-                 <textarea> 태그를 지우고 싶음
-                 -->
                  </div>
              </div>
              <hr>

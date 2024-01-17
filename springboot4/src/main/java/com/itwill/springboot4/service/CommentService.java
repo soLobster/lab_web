@@ -69,7 +69,9 @@ public class CommentService {
         log.info("==============");
         
         Comment comment =  commentDao.findById(id).orElseThrow();
-        
+
+
+
         Comment newComment = comment.builder()
                 .id(id)
                 .post(comment.getPost())
