@@ -34,4 +34,8 @@ public class BaseTimeEntity {
     public LocalDate changeDateType(LocalDateTime time) {
         return createdTime.toLocalDate();
     }
+    
+    public LocalDateTime updateCreatedTime(LocalDateTime time) {
+        return this.createdTime;
+    }
 }

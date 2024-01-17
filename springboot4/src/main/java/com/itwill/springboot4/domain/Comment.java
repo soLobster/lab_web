@@ -1,5 +1,7 @@
 package com.itwill.springboot4.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +21,8 @@ import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE) @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE) 
+@Builder 
 @Getter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -40,4 +43,9 @@ public class Comment extends BaseTimeEntity{
     
     @Basic(optional = false)
     private String writer;
+
+    public void updateComment(String ctext) {
+        this.ctext = ctext;
+    }
+    
 }

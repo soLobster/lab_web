@@ -112,7 +112,7 @@
                     data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" 
                     data-id="${comment.id}">수정</button>
                  </div>
-                 <div class="collapse" id="collapseExample">
+                 <div class="collapse mt-1" id="collapseExample">
                  </div>
              </div>
              <hr>
@@ -153,8 +153,21 @@
                 //alert('수정 버튼입니다....!');
                 if(btn.innerHTML === '수정'){
                   btn.innerHTML = '수정 확정';
-                  collapseExample.innerHTML += `<textarea class = "form-control my-2" id = 'updateTextarea'></textarea>`; 
-                } 
+                  collapseExample.innerHTML += 
+                  `<textarea class = "form-control my-2" id = 'updateTextarea'></textarea>
+                  <div class = "d-grid gap-1 d-md-flex justify-content-md-end">
+                  <button class = "btn btn-secondary btn-sm" id = "closeModify">창 닫기</button>
+                  </div>                         
+                  `; 
+                  
+                  // TODO : 창닫기 코드의 위치는 어디가 되어야 할까...? 
+                  //  const btnModify = document.querySelector('button#closeModify')
+                  //      btnModify.addEventListener('click' , () => {
+                  //      btn.innerHTML = '수정';
+                  //      collapseExample.innerHTML = '';
+                  //  });
+                
+                }
                 else if (btn.innerHTML === '수정 확정') {
                     const result = confirm('댓글을 수정 하겠습니까??');
                     // 버튼을 collapse로 했기에 누르면 닫힌다.
@@ -185,6 +198,7 @@
                         console.log(error);
                     }
                 }
+                
             });
         }
      }; // end function makeCommentElements

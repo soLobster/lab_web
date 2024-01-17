@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.springboot4.domain.Comment;
 import com.itwill.springboot4.domain.CommentRepository;
@@ -62,6 +63,7 @@ public class CommentService {
         commentDao.deleteById(id);
     }
     
+    @Transactional
     public Comment updateComment(Long id , CommentUpdateDto dto) {
         log.info("==============");
         log.info("COMMENT SERVICE - UPDATE COMMENT");
@@ -70,17 +72,8 @@ public class CommentService {
         
         Comment comment =  commentDao.findById(id).orElseThrow();
 
-
-
-        Comment newComment = comment.builder()
-                .id(id)
-                .post(comment.getPost())
-                .ctext(dto.getCtext())
-                .writer(comment.getWriter())
-                .build();
+        comment.updateComment(dto.getCtext());
         
-        commentDao.save(newComment);
-        
-        return newComment;
+        return comment;
     }
 }
