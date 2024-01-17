@@ -153,18 +153,32 @@
         let btnModifies = document.querySelectorAll('button.btnCommentModify');
         const collapseExample = document.querySelector('div#collapseExample');
         for (let btn of btnModifies){
-            btn.addEventListener('click', () => {
-                alert('수정 버튼입니다....!');
+            btn.addEventListener('click', (e) => {
+                //alert('수정 버튼입니다....!');
                 if(btn.innerHTML === '수정'){
                   btn.innerHTML = '수정 확정';
                   collapseExample.innerHTML += `<textarea class = "form-control my-2"></textarea>`; 
                 } 
                 else if (btn.innerHTML === '수정 확정') {
-                    btn.innerHTML = '수정';
+                    const result = confirm('댓글을 수정 하겠습니까??');
+                    // 버튼을 collapse로 했기에 누르면 닫힌다.
                     // 업데이트를 수행한다. 그 다음에 div를 비워야함.
-                    collapseExample.innerHTML = '';
+                    const id = e.target.getAttribute('data-id');
+                    console.log(id);
+                    
+                    
+                    if(!result) {
+                        
+                        return;
+                    }
+                    
+                    try{
+                        btn.innerHTML = '수정';    
+                        collapseExample.innerHTML = '';
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
-                
             });
         }
      }; // end function makeCommentElements
