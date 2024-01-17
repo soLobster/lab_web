@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" 
                     data-id="${comment.id}">수정</button>
                  </div>
-                 <div class="collapse mt-1" id="collapseExample" data-id = ${comment.id.toString()}>
+                 <div class="collapse mt-1" id="collapseExample" data-id = ${comment.id}>
                  </div>
              </div>
              <hr>
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const commentId = e.target.getAttribute('data-id');
                 console.log(commentId);
-                const collapseExample = document.querySelectorAll(`div#collapseExample-${div.getAttribute('data-id')}`);
+                const collapseExample = document.querySelector(`div#collapseExample-${div.getAttribute('data-id')}`);
                 console.log(collapseExample);
 
                 if(btn.innerHTML === '수정'){
