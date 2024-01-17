@@ -10,6 +10,7 @@ import com.itwill.springboot4.domain.CommentRepository;
 import com.itwill.springboot4.domain.Post;
 import com.itwill.springboot4.domain.PostRepository;
 import com.itwill.springboot4.dto.CommentRegisterRequestDto;
+import com.itwill.springboot4.dto.CommentUpdateDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,5 +60,25 @@ public class CommentService {
         log.info("======================");
         
         commentDao.deleteById(id);
+    }
+    
+    public Comment updateComment(Long id , CommentUpdateDto dto) {
+        log.info("==============");
+        log.info("COMMENT SERVICE - UPDATE COMMENT");
+        log.info("COMMENT ID = {} , UPDATE DTO = {}", id, dto.getCtext());        
+        log.info("==============");
+        
+        Comment comment =  commentDao.findById(id).orElseThrow();
+        
+        Comment newComment = comment.builder()
+                .id(id)
+                .post(comment.getPost())
+                .ctext(dto.getCtext())
+                .writer(comment.getWriter())
+                .build();
+        
+        commentDao.save(newComment);
+        
+        return newComment;
     }
 }

@@ -157,7 +157,7 @@
                 //alert('수정 버튼입니다....!');
                 if(btn.innerHTML === '수정'){
                   btn.innerHTML = '수정 확정';
-                  collapseExample.innerHTML += `<textarea class = "form-control my-2"></textarea>`; 
+                  collapseExample.innerHTML += `<textarea class = "form-control my-2" id = 'updateTextarea'></textarea>`; 
                 } 
                 else if (btn.innerHTML === '수정 확정') {
                     const result = confirm('댓글을 수정 하겠습니까??');
@@ -168,13 +168,23 @@
                     
                     
                     if(!result) {
-                        
+                        collapseExample.className = 'collapse show';
+                        btn.innerHTML = '수정 확정';
                         return;
                     }
                     
+                    const ctext = document.querySelector('textarea#updateTextarea').value;
+                    
+                    const data = {ctext};
+                    
+                    console.log(data);
+                    
                     try{
-                        btn.innerHTML = '수정';    
+                        const response = axios.put(`/api/comment/${id}`, data);
+                        btn.innerHTML = '수정';
                         collapseExample.innerHTML = '';
+                        alert('댓글을 수정 하였습니다.');
+                        getAllComments();
                     } catch (error) {
                         console.log(error);
                     }

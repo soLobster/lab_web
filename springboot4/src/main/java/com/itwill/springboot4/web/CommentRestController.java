@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.springboot4.domain.Comment;
 import com.itwill.springboot4.dto.CommentRegisterRequestDto;
+import com.itwill.springboot4.dto.CommentUpdateDto;
 import com.itwill.springboot4.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
@@ -70,5 +72,16 @@ public class CommentRestController {
         }
         
        return result; 
+    }
+    
+    @PutMapping("{id}")
+    public ResponseEntity<Comment> updateComment(@PathVariable (name = "id") Long id, @RequestBody CommentUpdateDto dto){
+        log.info("==============");
+        log.info("updateComment COMMENT ID = {}", id);
+        log.info("==============");
+        
+        Comment updateComment = commentSvc.updateComment(id, dto);
+        
+        return ResponseEntity.ok(updateComment);
     }
 }
