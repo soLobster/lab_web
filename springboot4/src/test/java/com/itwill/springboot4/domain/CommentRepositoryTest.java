@@ -37,7 +37,8 @@ public class CommentRepositoryTest {
     //@Test
     public void readByPostid() {
         //List<Comment> list = commentDao.findByPostIdOrderByIdDesc(316L);
-        List<Comment> list = commentDao.findByPostId(316L, Sort.by("id").descending());
+        Post post = postDao.findById(316L).orElseThrow();
+        List<Comment> list = commentDao.findByPost(post, Sort.by("id").descending());
         for(Comment comment : list) {
             log.info("comment = {}",comment);
         }
