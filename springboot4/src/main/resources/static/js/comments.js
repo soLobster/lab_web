@@ -111,7 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" 
                     data-id="${comment.id}">수정</button>
                  </div>
-                 <div class="collapse mt-1" id="collapseExample" data-id = ${comment.id}>
+                 <div class="collapse mt-1" id="collapseExample-${comment.id}" data-id = ${comment.id}>
+                 <!-- 수정된 부분: 각 댓글에 대한 고유한 ID를 사용하여 textarea와 창닫기 버튼 추가 -->
+                    <textarea class="form-control my-2" id="updateTextarea-${comment.id}" data-id="${comment.id}"></textarea>
+                    <div class="d-grid gap-1 d-md-flex justify-content-md-end">
+                        <button class="closeModify btn btn-secondary btn-sm" id="closeModify-${comment.id}" data-id="${comment.id}">창 닫기</button>
+                    </div>
                  </div>
              </div>
              <hr>
@@ -152,29 +157,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
                 const commentId = e.target.getAttribute('data-id');
-                console.log('comment id = '+commentId);
+                console.log('comment id = '+ commentId);
                 
-                const collapseExample = document.querySelector(`#collapseExample[data-id="${commentId}"]`);
-                console.log('collapseExample = ' + collapseExample);
+                const collapseExample = document.querySelector(`#collapseExample-${commentId}`);
+                console.log('collapseExample = ' + collapseExample.getAttribute('data-id'));
+                
+                const btnCloseModify = document.querySelector(`button#closeModify-${commentId}`);
+                console.log(btnCloseModify);
+                const textarea = document.querySelector(`textarea#updateTextarea-${commentId}`);
+                
+                btnCloseModify.addEventListener('click', () => {    
+                    collapseExample.className = 'collapse';
+                    btn.innerHTML = '수정';
+                    textarea.value = '';
+                });
+                
+                
                 
                 if(btn.innerHTML === '수정'){
-                    btn.innerHTML = '수정 확정';
-                    collapseExample.innerHTML =
-                         `<textarea class = "form-control my-2" id = 'updateTextarea' data-id = "${commentId}"></textarea>
-                          <div class = "d-grid gap-1 d-md-flex justify-content-md-end">
-                            <button class = "closeModify btn btn-secondary btn-sm" id = "closeModify" data-id = "${commentId}" >창 닫기</button>
-                          </div>`;
-                          
-                } else if (btn.innerHTML === '수정 확정') {
-                    const ctext = document.querySelector('textarea#updateTextarea').value;
-                    const textarea = document.querySelector('textarea#updateTextarea');
                     
-                    if(ctext == ''){
-                        alert('수정 댓글을 입력해주세요');
-                        collapseExample.className = 'collapse show';
-                        btn.innerHTML = '수정 확정';
-                        return;
-                    }
+                    btn.innerHTML = '수정 확정';
+                    collapseExample.className = 'collapse show';
+                    
+                } else if (btn.innerHTML === '수정 확정') {
+                    
                     
                     const result = confirm('댓글을 수정 하겠습니까??');
                     // 버튼을 collapse로 했기에 누르면 닫힌다.
@@ -188,6 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         btn.innerHTML = '수정 확정';
                         return;
                     }
+                    
+                    const ctext = document.querySelector(`textarea#updateTextarea-${commentId}`).value;
+                    const textarea = document.querySelector(`textarea#updateTextarea-${commentId}`);
 
                     const data = {ctext};
 
@@ -204,17 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }// if...else if
                 
-                const btnCloseModify = document.querySelectorAll('button.closeModify');
-                console.log(btnCloseModify);
-                const textArea = document.querySelector('textarea#updateTextarea');
-                    for(let btnCM of btnCloseModify){
-                        btnCM.addEventListener('click', () => {
-                            collapseExample.className = 'collapse';
-                            textArea.innerHTML = '';
-                            btn.innerHTML = '수정';
-                        });
-                    }// end btnCM for
-                    
+ 
            });// end btn addEventListener
            
         } // end for btn
