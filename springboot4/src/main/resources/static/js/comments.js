@@ -152,10 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
         //  모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
         let btnModifies = document.querySelectorAll('button.btnCommentModify');
         for (let btn of btnModifies){
-            
+           
             btn.addEventListener('click', (e) => {
-
-
+                
+            e.preventDefault();
+            
                 const commentId = e.target.getAttribute('data-id');
                 console.log('comment id = '+ commentId);
                 
@@ -172,15 +173,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     textarea.value = '';
                 });
                 
-                
-                
                 if(btn.innerHTML === '수정'){
                     
                     btn.innerHTML = '수정 확정';
                     collapseExample.className = 'collapse show';
                     
                 } else if (btn.innerHTML === '수정 확정') {
-                    
+                  const ctext = document.querySelector(`textarea#updateTextarea-${commentId}`).value;
+
+                    if(ctext == ''){
+                        alert('수정할 댓글을 입력하셔야 합니다.');
+                        collapseExample.className = 'collapse show';
+                        btn.innerHTML = '수정 확정';
+                        return;
+                    }
                     
                     const result = confirm('댓글을 수정 하겠습니까??');
                     // 버튼을 collapse로 했기에 누르면 닫힌다.
@@ -188,14 +194,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const id = e.target.getAttribute('data-id');
                     console.log(id);
                     
-
                     if(!result) {
                         collapseExample.className = 'collapse show';
                         btn.innerHTML = '수정 확정';
                         return;
                     }
                     
-                    const ctext = document.querySelector(`textarea#updateTextarea-${commentId}`).value;
                     const textarea = document.querySelector(`textarea#updateTextarea-${commentId}`);
 
                     const data = {ctext};
@@ -212,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(error);
                     }
                 }// if...else if
-                
  
            });// end btn addEventListener
            
