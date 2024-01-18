@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  <div class = "d-grid gap-2 justify-content">
                     <span class = "d-none">${comment.id}</span>
                     <span class = "fw-bold fs-4">${comment.writer}</span>
-                    <span class="text-secondary">${time}</span>
+                    <span class = "text-secondary">${time}</span>
                  </div>
                  <hr class = "border-1">
                  <div>
@@ -146,40 +146,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //  모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
         let btnModifies = document.querySelectorAll('button.btnCommentModify');
-        // TODO: 각각의 <div class="collapse mt-1" id="collapseExample" data-id = ${comment.id}> 를 찾아서 넣어야한다...
         for (let btn of btnModifies){
+            
             btn.addEventListener('click', (e) => {
 
 
                 const commentId = e.target.getAttribute('data-id');
-                console.log(commentId);
-                const collapseExample = document.querySelector(`div#collapseExample-${div.getAttribute('data-id')}`);
-                console.log(collapseExample);
-
+                console.log('comment id = '+commentId);
+                
+                const collapseExample = document.querySelector(`#collapseExample[data-id="${commentId}"]`);
+                console.log('collapseExample = ' + collapseExample);
+                
                 if(btn.innerHTML === '수정'){
                     btn.innerHTML = '수정 확정';
                     collapseExample.innerHTML =
-                        `<textarea class = "form-control my-2" id = 'updateTextarea'></textarea>
-                  <div class = "d-grid gap-1 d-md-flex justify-content-md-end">
-                  <button class = "btn btn-secondary btn-sm" id = "closeModify">창 닫기</button>
-                  </div>                         
-                  `;
-                }
-                else if (btn.innerHTML === '수정 확정') {
+                         `<textarea class = "form-control my-2" id = 'updateTextarea' data-id = "${commentId}"></textarea>
+                          <div class = "d-grid gap-1 d-md-flex justify-content-md-end">
+                            <button class = "closeModify btn btn-secondary btn-sm" id = "closeModify" data-id = "${commentId}" >창 닫기</button>
+                          </div>`;
+                          
+                } else if (btn.innerHTML === '수정 확정') {
+                    const ctext = document.querySelector('textarea#updateTextarea').value;
+                    const textarea = document.querySelector('textarea#updateTextarea');
+                    
+                    if(ctext == ''){
+                        alert('수정 댓글을 입력해주세요');
+                        collapseExample.className = 'collapse show';
+                        btn.innerHTML = '수정 확정';
+                        return;
+                    }
+                    
                     const result = confirm('댓글을 수정 하겠습니까??');
                     // 버튼을 collapse로 했기에 누르면 닫힌다.
                     // 업데이트를 수행한다. 그 다음에 div를 비워야함.
                     const id = e.target.getAttribute('data-id');
                     console.log(id);
-
+                    
 
                     if(!result) {
                         collapseExample.className = 'collapse show';
                         btn.innerHTML = '수정 확정';
                         return;
                     }
-
-                    const ctext = document.querySelector('textarea#updateTextarea').value;
 
                     const data = {ctext};
 
@@ -188,15 +196,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     try{
                         const response = axios.put(`/api/comment/${id}`, data);
                         btn.innerHTML = '수정';
-                        collapseExample.innerHTML = '';
+                        textarea.innerHTML = '';
                         alert('댓글을 수정 하였습니다.');
                         getAllComments();
                     } catch (error) {
                         console.log(error);
                     }
-                }
-
-            });
-        }
+                }// if...else if
+                
+                const btnCloseModify = document.querySelectorAll('button.closeModify');
+                console.log(btnCloseModify);
+                const textArea = document.querySelector('textarea#updateTextarea');
+                    for(let btnCM of btnCloseModify){
+                        btnCM.addEventListener('click', () => {
+                            collapseExample.className = 'collapse';
+                            textArea.innerHTML = '';
+                            btn.innerHTML = '수정';
+                        });
+                    }// end btnCM for
+                    
+           });// end btn addEventListener
+           
+        } // end for btn
+        
     }; // end function makeCommentElements
+    
 });
