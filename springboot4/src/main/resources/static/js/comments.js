@@ -5,6 +5,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('comments js...');
 
+    let currentPage = 0; // 현재 보고 있는 댓글 페이지
+    let totalPages = 0; // 댓글 전체 목록의 페이지 수
+
+
     const bsCollapse = new bootstrap.Collapse('div#collapseComments', {
         toggle: false  // 토글의 기본값. 열린 상태일지 닫힌 상태일지
     });
@@ -17,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if(btnToggleCollapse.innerHTML === '댓글 보기'){
             btnToggleCollapse.innerHTML = '가리기';
-            getAllComments(); // 댓글 목록 갱신
+            getAllComments(0); // 댓글 목록 갱신
         } else {
             btnToggleCollapse.innerHTML = '댓글 보기';
         }
@@ -27,6 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnRegComment = document.querySelector('button#btnRegComment');
 
     btnRegComment.addEventListener('click', registerComment); // 함수 이름 -> registerComment
+
+    // 댓글 더보기 버튼의 이벤트 리스너.
+    const btnMoreComment = document.querySelector('button#btnMoreComment');
+    btnMoreComment.addEventListener('click', () => {
+            getAllComments(currentPage + 1);
+    });
 
     // ---- 함수 선언 ----
     // 버튼의 클릭 이벤트 리스너.
@@ -58,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('댓글 등록을 성공했습니다...!');
 
             // 댓글 목록 갱신
-            getAllComments();
+            getAllComments(0);
 
 
         } catch (error) {
@@ -70,12 +80,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // 댓글 목록 Collapse 객체를 펼칠 때, 댓글 등록이 성공했을 때.
     // 댓글 목록을 갱신하기 위해서 호출.
 
-    async function getAllComments() {
+    async function getAllComments(page) {
+
+        if(page === undefined){ // 아규먼트가 없으면
+            // undefined란 초기화 되지 않은 변수
+            page = 0;
+        } 
+
         const postId = document.querySelector('input#postId').value;
-        const uri = `/api/comment/all/${postId}`;
+        // Ajax 요청을 보낼 주소:
+        // path Variable - 댓글이 달린 포스트 아이디 (postId), RequestParam -> 댓글 페이지 (page)
+        const uri = `/api/comment/all/${postId}?page=${page}`; 
         try {
+
             const response = await axios.get(uri);
             console.log(response);
+
+            currentPage = response.data.number;
+            totalPages = response.data.totalPages;
+            
+            const divbuttonMoreComment = document.querySelector('div#divBtnMoreCmt');
+            if(currentPage + 1 < totalPages){ // 현재 페이지 번호가 전체 페이지 개수보다 작을 때.
+                // 다음 페이지가 있을 때.
+                divbuttonMoreComment.classList.remove('d-none');
+            } else {
+                // 다음 페이지가 없을 때.
+                divbuttonMoreComment.classList.add('d-none');
+            }
 
             makeCommentElements(response.data);
 
@@ -89,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function makeCommentElements(data){
         const commentDiv = document.querySelector('div#commentDiv'); // 댓글을 추가할 영역 div
         let htmlStr = '' ; // div에 삽입할 html 코드
-        for (let comment of data){
+        for (let comment of data.content){
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'Asia/Seoul' };
             const time = new Date(comment.modifiedTime).toLocaleString('ko-KR', options);
             htmlStr += `
@@ -108,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  <div class="d-grid gap-1 d-md-flex justify-content-md-end">
                     <button class="btnCommentDelete btn btn-outline-danger btn-sm me-md-2" data-id="${comment.id}">삭제</button>
                     <button class="btnCommentModify btn btn-outline-primary btn-sm" data-bs-toggle="collapse" 
-                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" 
+                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id = "modifyBtn-${comment.id}"
                     data-id="${comment.id}">수정</button>
                  </div>
                  <div class="collapse mt-1" id="collapseExample-${comment.id}" data-id = ${comment.id}>
@@ -122,12 +153,32 @@ document.addEventListener('DOMContentLoaded', () => {
              <hr>
              `;
         }
-        commentDiv.innerHTML = htmlStr;
+        
+        if(currentPage === 0) {
+            commentDiv.innerHTML = htmlStr;
+        } else {
+            commentDiv.innerHTML += htmlStr;
+        }
+
         // 모든 삭제 버튼을 찾아서 클릭 이벤트 리스너를 등록
         const btnDeletes = document.querySelectorAll('button.btnCommentDelete');
         for (let btn of btnDeletes) {
-            btn.addEventListener('click', (e) => {
-                const result = confirm('댓글을 삭제하겠습니까??');
+            btn.removeEventListener('click', deleteComments);
+            btn.addEventListener('click', deleteComments);
+        }
+
+        //  모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
+        const btnModifies = document.querySelectorAll('button.btnCommentModify');
+        for (let btn of btnModifies){
+            btn.removeEventListener('click' , updateComments);
+            btn.addEventListener('click', updateComments);// end btn addEventListener
+        } // end for btn
+        
+    }; // end function makeCommentElements
+    
+    async function deleteComments(e){
+
+        const result = confirm('댓글을 삭제하겠습니까??');
 
                 if(!result){
                     return;
@@ -138,89 +189,83 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const uri = `/api/comment/${id}`;
                 try {
-                    const response = axios.delete(uri);
+                    const response = await axios.delete(uri);
                     alert('댓글을 삭제했습니다.');
-                    getAllComments();
+                    getAllComments(0);
                     console.log(response);
                 }catch(error){
                     console.log(error);
                 }
                 //alert('삭제 버튼 입니다...!!!');
-            });
-        }
 
-        //  모든 수정 버튼을 찾아서 클릭 이벤트 리스너를 등록
-        let btnModifies = document.querySelectorAll('button.btnCommentModify');
-        for (let btn of btnModifies){
-           
-            btn.addEventListener('click', (e) => {
-                
-            e.preventDefault();
-            
-                const commentId = e.target.getAttribute('data-id');
-                console.log('comment id = '+ commentId);
-                
-                const collapseExample = document.querySelector(`#collapseExample-${commentId}`);
-                console.log('collapseExample = ' + collapseExample.getAttribute('data-id'));
-                
-                const btnCloseModify = document.querySelector(`button#closeModify-${commentId}`);
-                console.log(btnCloseModify);
-                const textarea = document.querySelector(`textarea#updateTextarea-${commentId}`);
-                
-                btnCloseModify.addEventListener('click', () => {    
-                    collapseExample.className = 'collapse';
-                    btn.innerHTML = '수정';
-                    textarea.value = '';
-                });
-                
-                if(btn.innerHTML === '수정'){
-                    
-                    btn.innerHTML = '수정 확정';
-                    collapseExample.className = 'collapse show';
-                    
-                } else if (btn.innerHTML === '수정 확정') {
-                  const ctext = document.querySelector(`textarea#updateTextarea-${commentId}`).value;
+    }
 
-                    if(ctext == ''){
-                        alert('수정할 댓글을 입력하셔야 합니다.');
-                        collapseExample.className = 'collapse show';
-                        btn.innerHTML = '수정 확정';
-                        return;
-                    }
-                    
-                    const result = confirm('댓글을 수정 하겠습니까??');
-                    // 버튼을 collapse로 했기에 누르면 닫힌다.
-                    // 업데이트를 수행한다. 그 다음에 div를 비워야함.
-                    const id = e.target.getAttribute('data-id');
-                    console.log(id);
-                    
-                    if(!result) {
-                        collapseExample.className = 'collapse show';
-                        btn.innerHTML = '수정 확정';
-                        return;
-                    }
-                    
-                    const textarea = document.querySelector(`textarea#updateTextarea-${commentId}`);
-
-                    const data = {ctext};
-
-                    console.log(data);
-
-                    try{
-                        const response = axios.put(`/api/comment/${id}`, data);
-                        btn.innerHTML = '수정';
-                        textarea.innerHTML = '';
-                        alert('댓글을 수정 하였습니다.');
-                        getAllComments();
-                    } catch (error) {
-                        console.log(error);
-                    }
-                }// if...else if
- 
-           });// end btn addEventListener
-           
-        } // end for btn
+    async function updateComments(e) {
         
-    }; // end function makeCommentElements
-    
+        e.preventDefault();
+            
+        const commentId = e.target.getAttribute('data-id');
+        console.log('comment id = '+ commentId);
+        
+        const collapseExample = document.querySelector(`#collapseExample-${commentId}`);
+        console.log('collapseExample = ' + collapseExample.getAttribute('data-id'));
+        
+        const btnCloseModify = document.querySelector(`button#closeModify-${commentId}`);
+        console.log(btnCloseModify);
+        const textarea = document.querySelector(`textarea#updateTextarea-${commentId}`);
+
+        const btn = document.querySelector(`button#modifyBtn-${commentId}`)
+
+        btnCloseModify.addEventListener('click', () => {    
+            collapseExample.className = 'collapse';
+            btn.innerHTML = '수정';
+            textarea.value = '';
+        });
+        
+        if(btn.innerHTML === '수정'){
+            
+            btn.innerHTML = '수정 확정';
+            collapseExample.className = 'collapse show';
+            
+        } else if (btn.innerHTML === '수정 확정') {
+          const ctext = document.querySelector(`textarea#updateTextarea-${commentId}`).value;
+
+            if(ctext == ''){
+                alert('수정할 댓글을 입력하셔야 합니다.');
+                collapseExample.className = 'collapse show';
+                btn.innerHTML = '수정 확정';
+                return;
+            }
+            
+            const result = confirm('댓글을 수정 하겠습니까??');
+            // 버튼을 collapse로 했기에 누르면 닫힌다.
+            // 업데이트를 수행한다. 그 다음에 div를 비워야함.
+            const id = e.target.getAttribute('data-id');
+            console.log(id);
+            
+            if(!result) {
+                collapseExample.className = 'collapse show';
+                btn.innerHTML = '수정 확정';
+                return;
+            }
+            
+            const textarea = document.querySelector(`textarea#updateTextarea-${commentId}`);
+
+            const data = {ctext};
+
+            console.log(data);
+
+            try{
+                const response = await axios.put(`/api/comment/${id}`, data);
+                btn.innerHTML = '수정';
+                textarea.innerHTML = '';
+                alert('댓글을 수정 하였습니다.');
+                getAllComments(0);
+            } catch (error) {
+                console.log(error);
+            }
+        }// if...else if
+
+    }
+
 });

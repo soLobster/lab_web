@@ -2,6 +2,7 @@ package com.itwill.springboot4.web;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,12 +47,12 @@ public class CommentRestController {
     }
     
     @GetMapping("/all/{postId}")
-    public ResponseEntity<List<Comment>> getAllComments(@PathVariable (name = "postId") Long postId){
+    public ResponseEntity<Page<Comment>> getAllComments(@PathVariable (name = "postId") Long postId, @RequestParam (name = "page") int page){
         log.info("================");
-        log.info("getAllComments POSTID = {}", postId);
+        log.info("getAllComments POSTID = {}, PAGE = {}", postId, page);
         log.info("================");
         
-        List<Comment> commentList = commentSvc.getAllComments(postId);
+        Page<Comment> commentList = commentSvc.getAllCommentsToPage(postId, page);
         
         return ResponseEntity.ok(commentList);
     }

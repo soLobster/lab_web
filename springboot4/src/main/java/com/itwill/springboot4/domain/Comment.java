@@ -1,6 +1,5 @@
 package com.itwill.springboot4.domain;
 
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
