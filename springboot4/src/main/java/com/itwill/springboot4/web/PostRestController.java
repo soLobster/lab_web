@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ public class PostRestController {
     
     private final PostService postService;
     
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody PostDto dto){
         log.info("createPost() = {}", dto);
@@ -45,6 +47,7 @@ public class PostRestController {
         return entity;
     }   
     
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") long id){
         log.info("deletePost() = {}", id);
@@ -64,6 +67,7 @@ public class PostRestController {
          
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody PostDto dto) {
         log.info("updatePost() = {} ", id);

@@ -3,6 +3,7 @@ package com.itwill.springboot4.web;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,7 +47,6 @@ public class PostController {
         log.info(model.toString());
     }
     
-    
     @GetMapping("/details/{id}")
     public String getPostDetails(@PathVariable (name = "id") long id, Model model) {
         log.info("getPostDetails()");
@@ -57,7 +57,8 @@ public class PostController {
         
         return "post/details";
     }
-   
+    
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/update/{id}")
     public String getPostUpdate(@PathVariable (name = "id") long id, Model model) {
         log.info("getPostUpdate()");
@@ -69,6 +70,7 @@ public class PostController {
         return "post/update";
     }
     
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/create")
     public String postCreate() {
         log.info("create Post ()");

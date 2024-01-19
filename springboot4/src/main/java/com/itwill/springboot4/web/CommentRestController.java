@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ public class CommentRestController {
 
     private final CommentService commentSvc;
     
+    @PreAuthorize("hasRole('USER')")
     @PostMapping
     public ResponseEntity<Comment> regComment(@RequestBody CommentRegisterRequestDto dto){
         log.info("================");
@@ -57,6 +59,7 @@ public class CommentRestController {
         return ResponseEntity.ok(commentList);
     }
     
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteComment(@PathVariable (name = "id") Long id){
         log.info("==============");
@@ -75,6 +78,7 @@ public class CommentRestController {
        return result; 
     }
     
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("{id}")
     public ResponseEntity<Comment> updateComment(@PathVariable (name = "id") Long id, @RequestBody CommentUpdateDto dto){
         log.info("==============");
