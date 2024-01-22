@@ -25,15 +25,22 @@
                     <li class = "nav-item">
                         <a class="nav-link fs-3" th:href="@{/post/list}">Post</a>
                     </li>
-                    <li class = "nav-item">
-                        <a class="nav-link fs-3" th:href="@{/login}">Sign in</a>
-                    </li>
-                    <li class = "nav-item">
-                        <a class="nav-link fs-3 disabled" th:href="@{/signup}">Sign up</a>
-                    </li>
-                    <li class = "nav-item">    
-                        <a class="nav-link fs-3" th:href="@{/logout}">Sign out</a>
-                    </li>    
+                    <th:block sec:authorize="isAnonymous()">
+                        <li class = "nav-item">
+                            <a class="nav-link fs-3" th:href="@{/login}">Sign in</a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class="nav-link fs-3 disabled" th:href="@{/signup}">Sign up</a>
+                        </li>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li class = "nav-item">    
+                            <a class="nav-link fs-3 " th:href="@{/logout}">
+                                <span class = "text-primary" sec:authentication="name"></span>
+                                <span>Sign out</span>
+                            </a>
+                        </li>    
+                    </th:block>
                 </ul>
             </div>    
         </div>    

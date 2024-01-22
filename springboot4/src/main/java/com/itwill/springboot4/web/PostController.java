@@ -58,7 +58,7 @@ public class PostController {
         return "post/details";
     }
     
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')") // @PreAuthorize("authenticated()") 
     @GetMapping("/update/{id}")
     public String getPostUpdate(@PathVariable (name = "id") long id, Model model) {
         log.info("getPostUpdate()");
