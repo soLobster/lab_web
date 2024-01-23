@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{/layout/fragments :: myhead}"></head>
+
+<body>
+<header th:replace="~{/layout/fragments :: myheader ('SIGN UP')}"></header>
+
+<main class = "card card-body">
+    <div class = "mt-4 container bg-body-secondary">
+        <div class = "row justify-content-md-center">
+            <form method = "post">
+            <div class = "my-2">
+              <label for="inputId" class="form-label">ID</label>
+              <div class = "input-group">
+                <input type="text" class="form-control" id="SignUpId"  name = "username" placeholder = "Submit ID" autofocus required/>
+                <input class="btn btn-primary" type="button" id="usernameCheck" value="중복 체크"/>
+              </div>
+            </div> 
+              <div class="my-2">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="SignUpPassword" name = "password" placeholder = "Submit Password">
+              </div>
+              <div class="my-2">
+                <label for="inputEmail" class="form-label">Email</label>
+                <div class = "input-group">
+                    <input type="email" class="form-control" id="SignUpEmail" name = "email" placeholder = "Submit Email">
+                    <input class="btn btn-primary" type="button" id="signUpEmailCheck" onclick="emailCheck()" value="중복 체크"/>
+                </div>
+              </div>
+              <div class = "my-2">
+                <button type="submit" class="form-control btn btn-primary">SignUp</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/js/member-signup.js"></script>
+</body>
+</html>

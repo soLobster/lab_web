@@ -71,7 +71,10 @@ public class SecurityConfig {
         http.csrf((csrf) -> csrf.disable());
         
         // 로그인 페이지(뷰) 설정 - 스프링 시큐리티에서 제공하는 기본 페이지를 이용.
-        http.formLogin(Customizer.withDefaults());
+        // http.formLogin(Customizer.withDefaults());
+        
+        // 로그인 (폼) 페이지를 Custom 페이지(우리가 작성하는 페이지)로 설정.
+        http.formLogin((x) -> x.loginPage("/member/login")); // 로그인 할 페이지를 설정
         
         // 로그아웃 이후에 이동할 페이지 설정 - 홈 페이지(/)
         http.logout((logout) -> logout.logoutSuccessUrl("/"));

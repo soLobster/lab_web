@@ -8,9 +8,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.itwill.springboot4.config.SecurityConfig;
 import com.itwill.springboot4.domain.Member;
 import com.itwill.springboot4.domain.MemberRepository;
+import com.itwill.springboot4.domain.MemberRole;
 import com.itwill.springboot4.dto.MemberSecurityDto;
+import com.itwill.springboot4.dto.MemberSignUpDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +25,9 @@ public class MemberService implements UserDetailsService{
     
     @Autowired
     private final MemberRepository memberDao;
+    
+    @Autowired
+    private final SecurityConfig sConfig;
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -36,4 +42,18 @@ public class MemberService implements UserDetailsService{
             throw new UsernameNotFoundException("There is no "+username);
         }        
     }// end loadUserByUsername method
+    
+    public void signUp(MemberSignUpDto dto) {
+        log.info("MEMBER SERVICE - SIGN UP - {} ", dto);
+        
+        Member entity = Member.builder().username(dto.getUsername())
+                .password(sConfig.passwordEncoder().encode(dto.getPassword()))
+                .email(dto.getEmail())
+                .build();
+        
+        entity.addRole(MemberRole.USER);
+        
+        memberDao.save(entity);
+    }
+    
 }

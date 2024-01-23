@@ -16,7 +16,7 @@
                 <label class = "form-label fs-5 my-2">내용</label>
                 <textarea class = "form-control fs-5" id = "content" name = "content"></textarea>
                 <label class = "form-label fs-5 my-2">작성자</label>
-                <input class = "form-control fs-5 mb-3" id ="author" name = "author" />
+                <input class = "form-control fs-5 mb-3" id ="author" name = "author" th:value = "${#authentication.name}" readonly/>
                 <div class="d-grid d-md-flex justify-content-md-end mb-3">
                   <a class="btn btn-success me-md-2" id="btnSubmit" role="button" >등록</a>
                 </div>

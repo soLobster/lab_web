@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 댓글들의 배열을 아규먼트 data로 전달 받아서, html 코드를 div에 추가
     function makeCommentElements(data){
         const commentDiv = document.querySelector('div#commentDiv'); // 댓글을 추가할 영역 div
+        const authUser = document.querySelector('input#cWriter').value; // 로그인한 유저의 아이디를 찾는다. -> th:value를 찾는다 ${#authentication.name}"
         let htmlStr = '' ; // div에 삽입할 html 코드
         for (let comment of data.content){
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'Asia/Seoul' };
@@ -131,6 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class = "fw-bold fs-4">${comment.writer}</span>
                     <span class = "text-secondary">${time}</span>
                  </div>
+                 `;
+                if(authUser === comment.writer) {
+                    htmlStr +=
+                 `
                  <hr class = "border-1">
                  <div>
                  <textarea class = "tArea form-control" readonly>${comment.ctext}</textarea>
@@ -152,6 +157,15 @@ document.addEventListener('DOMContentLoaded', () => {
              </div>
              <hr>
              `;
+             } else{
+                htmlStr += `
+                    <hr class = "border-1">
+                        <div>
+                        <textarea class = "tArea form-control" readonly>${comment.ctext}</textarea>
+                        </div>
+                    <hr class = "border-1">
+            </div>`;
+             }
         }
         
         if(currentPage === 0) {
